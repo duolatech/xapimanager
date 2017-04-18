@@ -1,0 +1,8 @@
+ul.timeline{margin:0 auto;list-style-type: none;background: url("../images/line.png") repeat-y scroll 288px 0 transparent;}
+ul.timeline .c{clear:both;}
+ul.timeline .ver{float:left;margin-right:20px;text-align:right;width:245px;min-height:62px;overflow:hidden;}
+ul.timeline .version{font-size:40px;color:#3594cb;}
+ul.timeline .time{color:#888;}
+ul.timeline .number{float:left;cursor:pointer;background: url("../images/dot.png") no-repeat scroll 0 0 transparent;_background: url("../images/dot.gif") no-repeat scroll 0 0 transparent;width: 56px;height: 56px;line-height: 56px;text-align: center;color: #fff;font-size: 18px;}
+ul.timeline .log{float:left;margin-left:20px;}
+ul.timeline .log pre{display:block;background-color:#3594cb;padding:20px;color:#fff;font-size:13px;margin:0 0 10px;line-height:20px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;border:1px solid #ccc;border: 1px solid rgba(0, 0, 0, 0.15);-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}

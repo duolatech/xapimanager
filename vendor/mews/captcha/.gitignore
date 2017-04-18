@@ -1,0 +1,7 @@
+/bootstrap/compiled.php
+.env.*.php
+.env.php
+composer.lock
+vendor
+/.idea
+/.settings

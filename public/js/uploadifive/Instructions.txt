@@ -1,0 +1,6 @@
+Instructions for Sample Implementation
+
+1. Upload all the files contained in the 'Sample' folder to the same location on your server.
+2. Create a folder named 'uploads' in the root of your website with the permissions set to 755.
+3. Navigate to the location you uplaoded the files to in your browser.
+4. Enjoy!  Contact us at support@uploadify.com if you have any questions.
