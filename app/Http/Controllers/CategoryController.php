@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\classifyRequest;
 use App\Http\Controllers\Controller;
 use Input, Validator, Log;
@@ -86,7 +87,7 @@ class CategoryController extends Controller
             $info['user'] = !empty($userinfo) ? $userinfo->toArray() : array();
         }
         //查询所有分类
-        $all = Classify::where('status', 1)->get();
+        $all = Classify::where('pid',0)->where('status', 1)->get();
         $info['classify'] = !empty($all) ? $all->toArray() : array();
         
         return view('Category.addSub', ['info'=>$info]);

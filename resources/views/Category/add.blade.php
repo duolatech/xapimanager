@@ -170,7 +170,7 @@ $(function(){
                 },
                 dataType: 'json',
                 success: function(res) {
-                	if(res.status){
+                	if(res.status==200){
                 		layer.msg(res.message, {icon: 1});
                 		setTimeout(function(){
 							 window.location.href = "{{route('Category.index')}}";;
