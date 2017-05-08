@@ -167,8 +167,8 @@ class ApiController extends Controller
         if(!empty($subClassify)){
             $subClass = array($subClassify);
         }elseif(!empty($classify)){
+            $apicls = array();
             foreach ($this->cls as $class){
-                $apicls = array();
                 if(!empty($class['child'])){
                     foreach ($class['child'] as $sub){
                         $apicls[$class['id']][] = $sub['id'];
@@ -305,7 +305,7 @@ class ApiController extends Controller
             $info[$key]['name'] = $value['classifyname'];
             $classify[$value['id']] = $value['classifyname'];
             if(!empty($value['child'])){
-				$child = array();
+                $child = array();
                 foreach ($value['child'] as $kol=>$vol){
                     $classify[$vol['id']] = $vol['classifyname'];
                     $child[$kol]['id'] = $vol['id'];

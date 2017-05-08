@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Input, Log;
 use App\Models\Classify;
-require_once app_path().'/tools/mpdf/mpdf.php';
+require_once app_path().'/tools/mpdf/vendor/autoload.php';
 set_time_limit(600);
 class ExportController extends Controller
 {
@@ -17,7 +17,7 @@ class ExportController extends Controller
     public function __construct(){
         
         //实例化mpdf
-        $this->mpdf = new \mPDF('utf-8','A4','','宋体',10,0,20,10);
+        $this->mpdf = new \Mpdf\Mpdf(['utf-8','A4','','宋体',10,0,20,10]);
     }
     /**
      * 导出分类Api
