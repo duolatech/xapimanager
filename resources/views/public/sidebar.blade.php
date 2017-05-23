@@ -36,8 +36,8 @@
 	<ul class="nav nav-list">
 	
 		@foreach($sys['ValidMenu'] as $menu)
-			<li class="@if(!empty($sys['Router'][Request::path()]) && $sys['Router'][Request::path()]==$menu['id'] ) active @endif
-				@if(!empty($sys['Router'][Request::path()]) && $sys['Router'][Request::path()]==$menu['id'] && !empty($menu['child'])) open @endif">
+			<li class="@if(!empty($sys['Router'][Request::path()]['id']) && $sys['Router'][Request::path()]==$menu['id'] ) active @endif
+				@if(!empty($sys['Router'][Request::path()]) && $sys['Router'][Request::path()]['id']==$menu['id'] && !empty($menu['child'])) open @endif">
 				<a href="{{$menu['path']}}" @if(!empty($menu['child'])) class="dropdown-toggle"  @endif> 
 					<i class="{{$menu['icon']}}"></i> 
 					<span class="menu-text">{{$menu['title']}}</span>

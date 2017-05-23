@@ -18,7 +18,10 @@
 					<div class="col-sm-9">
 						<select id="pid" name="pid" class="rcol-xs-10 col-sm-5">
 							@foreach($info['classify'] as $value)
-								<option value="{{$value['id']}}" @if(!empty($info['pid']) && $value['id']==$info['pid']) selected="selected" @endif >{{$value['classifyname']}}</option>
+								<option value="{{$value['id']}}" 
+									@if(!empty($info['pid']) && $value['id']==$info['pid']) selected="selected" @endif
+									@if(!empty($info['currentClassify']) && $value['id']== $info['currentClassify']) selected="selected" @endif
+								>{{$value['classifyname']}}</option>
 							@endforeach
 						</select> 
 						<span class="help-inline col-xs-12 col-sm-7"> 

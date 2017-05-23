@@ -14,9 +14,6 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<!-- PAGE CONTENT BEGINS -->
-			<div class="page-header">
-				<a>添加接口分类信息</a>
-			</div>
 			<form class="form-horizontal"
 				action="#" method="post" id="myForm">
 				<div class="form-group">
@@ -78,12 +75,12 @@
 					<input type="hidden" value="{{$info['id'] or ''}}" name="classifyId" />
 					<input type="hidden" value="{{ csrf_token() }}" name="_token" />
 					<button class="btn btn-info" type="submit">
-						<i class="icon-ok bigger-110"></i> 提交
+						<i class="icon-ok bigger-110"></i> 保存
 					</button>
 
 					&nbsp; &nbsp; &nbsp;
 					<button class="btn" type="reset">
-						<i class="icon-undo bigger-110"></i> 重置
+							<i class="icon-undo bigger-110"></i> 重置
 					</button>
 				</div>
 			</form>
@@ -139,7 +136,6 @@ $(function(){
 			return false;
 		}
 	});
-
 	var validator = $("#myForm").validate({
 		submitHandler: function(form) {	
 			var classify = $("input[name='classify']").val();

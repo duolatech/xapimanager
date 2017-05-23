@@ -7,40 +7,29 @@ XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供
 * 开放源代码，开发者可以根据自己的需求自由使用和定制
 * 让开发者更加专注于项目业务和逻辑的实现，及协同开发
 * 根据Api接口分类，灵活导出分类Api文档，便于开发人员阅读开发
+### v1.1版本说明
+1. 完善对php多个版本的支持，推荐在php5.6、php7.0、php7.1下使用
+2. 升级pdf导出类，支持php5.6以上版本
+2. 优化了创建子分类时，自动关联上级分类
+3. 修复了面包栏显示和链接跳转
+4. 修复分类跳转、保存及缓存清理
+5. 修复用户管理分页及查询错误
+6. 优化代码结构，并去除多余字体
 
-项目部署
+项目介绍
 ========
-* 部署代码前，请确保php已开启curl，mbstring这两个扩展，建议在php7下部署
-* 在MySQL中新建api数据库，并执行 /sql/xapi.sql文件。如果你是在命令行操作则可以像下面这样：
-```sql
-source /tmp/xapi.sql;
-```
-* 复制根目录下的.env.example重命名为.env文件，修改.env文件的数据库配置信息
-```php
-//数据库连接配置
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1          	//数据库地址
-DB_PORT=3306				//端口号
-DB_DATABASE=xapimanager		//数据库名
-DB_PREFIX=mx_				//表前缀
-DB_USERNAME=root			//帐号
-DB_PASSWORD=123456			//密码
-```
-* 把项目部署到Apache或Nginx中即可
-
-使用说明
-========
-1. 当前版本(v1.0)版本添加了用户权限控制，分类Api导出，代码审核，Api发表，多环境切换等。
-2. 您下载源码后可以根据自己的需求进行二次开发和定制。
-3. 已添加了一个超级管理员账号(用户名：admin，邮箱：admin@admin.com 密码：admin123)。
-4. 详情操作及二次开发说明，请访问官方技术社区。
-
-联系我们
-==========
-* 官方网站：	http://xapi.smaty.net
-* 哆啦技术社区：http://www.smaty.net
-* qq交流群:		623709829
+### 使用说明
+* 体验地址(账号：admin/admin123)：http://xapi.smaty.net
+* 项目部署及配置：http://www.smaty.net/t/xapi-manager
+* 社区讨论：http://www.smaty.net/t/xapi-manager
+* 交流群<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=d83394f78622527ea525d1d1bc5dca2e6aa8292ca2f05a04c46d172ac2180f29"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="xApi Manager" title="xApi Manager"></a>
+### 项目截图
+<img src="./screenshot/1.jpg">
+<img src="./screenshot/2.jpg">
+<img src="./screenshot/3.jpg">
+<img src="./screenshot/4.jpg">
+<img src="./screenshot/5.jpg">
 
 最后
-====
+========
 非常欢迎大家贡献代码，让这个项目成长的更好。

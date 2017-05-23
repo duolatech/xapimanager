@@ -89,6 +89,7 @@ class CategoryController extends Controller
         //查询所有分类
         $all = Classify::where('pid',0)->where('status', 1)->get();
         $info['classify'] = !empty($all) ? $all->toArray() : array();
+        $info['currentClassify'] = Input::get('classify');
         
         return view('Category.addSub', ['info'=>$info]);
     }
@@ -173,6 +174,12 @@ class CategoryController extends Controller
         $apiParam = $this->getParam($dids);
         if(!empty($apiParam)){
             foreach($list['info'] as &$vol){
+                if(empty($apiParam[$vol['id']])){
+                    $apiParam[$vol['id']] = array(
+                        'GET' => array('request'=>array(),'response'=>array()),
+                        'HEADER' => array('request'=>array()),
+                    );
+                }
                 $vol['param'] = $apiParam[$vol['id']];
             }
         }
@@ -193,7 +200,7 @@ class CategoryController extends Controller
         $data = array();
         $type = array('GET', 'POST', 'PUT', 'DELETE');
         if(!empty($dids)){
-            $apiParam = ApiParam::whereIn('id', $dids)->get();
+            $apiParam = ApiParam::whereIn('detailid', $dids)->get();
             $apiParam = !empty($apiParam) ? $apiParam->toArray() : array();
             foreach ($apiParam as $param){
                 //常规参数
@@ -205,7 +212,15 @@ class CategoryController extends Controller
                         $only = $arr[$value][$vol];
                         $param_info = $this->filter($only);
                         if(!empty($param_info)){
-                            $res[$vol][$value] =$this->filter($only);
+                            $res[$vol][$value] = $param_info;
+                        }
+                    }
+                }
+                //每种type都需要request、response
+                foreach ($res as &$rex){
+                    foreach ($way as $value){
+                        if(empty($rex[$value])){
+                            $rex[$value] = array();
                         }
                     }
                 }

@@ -72,12 +72,18 @@ $(function(){
 	
 	//分页
 	function pagination(pageCount){
+		var field   = $('select[name="field"]').val();
+		var keyword = $('input[name="keyword"]').val();
+		var group_id = $('select[name="group_id"]').val();
 		$('.M-box').pagination({
 		    pageCount: pageCount,
 		    jump: true,
 		    callback:function(api){
 		        var data = {
 		            page: api.getCurrent(),
+		            field:field,
+					keyword:keyword,
+					group_id:group_id
 		        };
 		        ajaxUser(data,0);
 		    }
@@ -99,7 +105,7 @@ $(function(){
             success: function(res) {
             	if(res.status==200){
             		render(res.data.info);
-            		pageCount = res.data.totalCount;
+            		pageCount = res.data.pageCount;
             		if(first==1){
             			pagination(pageCount);
                 	}

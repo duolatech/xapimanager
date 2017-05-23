@@ -22,8 +22,6 @@ class UserController extends Controller
      */
     public function index(Request $request){
         
-        $totalCount = User::orderBy('ctime', 'desc')->count();
-        $list['pageCount'] = ceil($totalCount/$this->limit);
         $group = AuthGroup::get();
         $list['group'] = !empty($group) ? $group->toArray() : array();
         
@@ -42,9 +40,9 @@ class UserController extends Controller
         $start = ($page - 1) * ($this->limit);
         $list['info'] = array();
         $User = new User();
-        $field = !empty($search) ? Input::get('field') : "";
-        $keyword = !empty($search) ? Input::get('keyword') : "";
-        $groupId = !empty($search) ? Input::get('group_id') : "";
+        $field = Input::get('field');
+        $keyword = Input::get('keyword');
+        $groupId = Input::get('group_id');
         //查询用户列表
         $list = $User->getUser($field, $keyword, $groupId, $start, $this->limit);
         //查询用户组
@@ -58,6 +56,8 @@ class UserController extends Controller
             $value['ctime'] = date('Y-m-d H:i', $value['ctime']);
             $value['groupname'] = $group[$value['group_id']];
         }
+        //页面总数
+        $list['pageCount'] = ceil($list['totalCount']/$this->limit);
         return response()->json(['status'=>200, 'data'=>$list]);
     }
     /**

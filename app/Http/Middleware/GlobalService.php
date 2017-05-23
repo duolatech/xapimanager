@@ -146,9 +146,15 @@ class GlobalService
         foreach ($info as $value){
             $path = trim($value['path'], '/');
             if($value['pid']==0){
-                $result[$path] = $value['id'];
+                $result[$path] = array(
+                    'title' => $value['title'],
+                    'id'   => $value['id']
+                );
             }else{
-                $result[$path] = $value['pid'];
+                $result[$path] = array(
+                    'title' => $value['title'],
+                    'id'   => $value['pid']
+                );
             }
         }
         return $result;

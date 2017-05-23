@@ -36,7 +36,6 @@ class User extends Model
         if(!empty($groupId)){
             $where[] = array('auth_access.group_id', '=', intval($groupId));
         }
-        
         $listObj = DB::table('user')->join('auth_access', 'user.uid', '=', 'auth_access.uid')
                 ->select('user.*', 'auth_access.group_id');
         

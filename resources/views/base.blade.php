@@ -26,8 +26,8 @@
 
 					<ul class="breadcrumb">
 						<li><i class="ace-icon fa fa-home home-icon"></i> <a
-							href="#">首页</a></li>
-						<li class="active">控制台</li>
+							href="/">首页</a></li>
+						<li class="active">{{$sys['Router'][Request::path()]['title'] or '控制台'}}</li>
 					</ul>
 
 					<div class="navbar-buttons navbar-header pull-right" role="navigation">

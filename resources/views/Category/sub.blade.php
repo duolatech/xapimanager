@@ -18,7 +18,7 @@
 					<!-- /.col -->
 
 					<span class="col-xs-6"> <span class="pull-right inline"> <span
-							class="grey smaller-80 bolder"><a href="{{route('Category.infoSub')}}">新增子分类</a></span>
+							class="grey smaller-80 bolder"><a href="{{route('Category.infoSub')}}?classify={{$info['classify']['id']}}">新增子分类</a></span>
 					</span>
 					</span>
 					<!-- /.col -->
