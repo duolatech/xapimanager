@@ -22,7 +22,7 @@ XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供
 * 体验地址(账号：admin/admin123)：http://xapi.smaty.net
 * 项目部署及配置：http://www.smaty.net/t/xapi-manager
 * 社区讨论：http://www.smaty.net/t/xapi-manager
-* 交流群<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=d83394f78622527ea525d1d1bc5dca2e6aa8292ca2f05a04c46d172ac2180f29"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="xApi Manager" title="xApi Manager"></a>
+* 交流群<a target="_blank" href="http//shang.qq.com/wpa/qunwpa?idkey=d83394f78622527ea525d1d1bc5dca2e6aa8292ca2f05a04c46d172ac2180f29"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="xApi Manager" title="xApi Manager"></a>
 ### 项目截图
 <img src="./screenshot/1.jpg">
 <img src="./screenshot/2.jpg">
