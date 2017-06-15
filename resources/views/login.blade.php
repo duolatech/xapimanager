@@ -6,6 +6,8 @@
 <head>
 <meta charset="utf-8">
 <title>{{$sys['Website']['title']}}</title>
+<meta name="keywords" content="{{$sys['Website']['keywords']}}" />
+<meta name="description" content="{{$sys['Website']['description']}}" />
 <link rel="stylesheet" type="text/css" href="{{URL::asset('css/login.css')}}" />
 </head>
 <body>
