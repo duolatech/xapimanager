@@ -1,0 +1,15 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Leaps Test Suite">
+            <directory>./LeapsTest</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>../src/Leaps/</directory>
+            <exclude>
+                <directory>../vendor/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
