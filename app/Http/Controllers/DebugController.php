@@ -37,13 +37,15 @@ class DebugController extends Controller
             //常规参数
             $way  = array('request');
             foreach ($way as $value){
-                $arr[$value] = json_decode($param[$value], true);
-                foreach ($type as $vol){
-                    $data['param'][$vol][$value] =$arr[$value][$vol];
-                }
+				if(!empty($param[$value])){
+					$arr[$value] = json_decode($param[$value], true);
+					foreach ($type as $vol){
+						$data['param'][$vol][$value] =$arr[$value][$vol];
+					}
+				}
             }
             //header头信息
-            $data['param']['HEADER']['request'] =  json_decode($param['header'], true);
+            $data['param']['HEADER']['request'] =  !empty($param['header']) ? json_decode($param['header'], true) : array();
         }
         
         $result['info'] = !empty($data) ? json_encode($data) : '0';
