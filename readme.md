@@ -29,12 +29,17 @@ XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供
 
 项目介绍
 ========
-**项目截图** 
+**控制台** 
 <img src="./screenshot/kongzhitai.jpg">
+**多项目设置** 
 <img src="./screenshot/duoxiangmu.jpg">
+**Api列表** 
 <img src="./screenshot/apilist.jpg">
-<img src="./screenshot/feilei.jpg">
+**Api分类** 
+<img src="./screenshot/fenlei.jpg">
+**Api环境设置** 
 <img src="./screenshot/huanjing.jpg">
+**Api调试**
 <img src="./screenshot/debug.jpg">
 
 最后
