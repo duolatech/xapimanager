@@ -179,7 +179,16 @@
     				},  
     			})
     		})
-    				
+    		document.onkeydown = function() {
+                if((event.keyCode==13)||(event.keyCode==32))
+                {
+                    event.keyCode=0;
+                    event.returnValue=false;
+                }
+            }
+            document.oncontextmenu = function() {
+                    event.returnValue = false;
+        	}
 		</script>
 	</div>
 	<div id="flotTip" style="display: none; position: absolute;"></div>
