@@ -101,7 +101,7 @@ class DebugController extends Controller
         //保存记录
         foreach ($record as &$vol){
             $path = parse_url($vol['apiurl']);
-            $vol['path'] = $path['path'];
+            $vol['path'] = !empty($path['path']) ? $path['path'] : '/';
             $vol['typeName'] = $this->type[$vol['type']];
         }
         
@@ -345,7 +345,7 @@ class DebugController extends Controller
         if($debug->id){
             $data = array(
                 'id'   =>$debug->id, 
-                'path' => $url['path'],
+                'path' => !empty($url['path']) ? $url['path'] : '/',
                 'type' => $data['type']
             );
             return response()->json(['status'=>200, 'message'=>'保存成功', 'data'=>$data]);
