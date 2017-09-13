@@ -8,22 +8,13 @@ XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供
 * 让开发者更加专注于项目业务和逻辑的实现，及协同开发
 * 支持多项目、多环境管理，支持消息通知及帮助中心
 
-
-### 使用说明（建议花几分钟阅读一下操作手册）
-
-* 体验地址：http://xapi.smaty.net (账号：admin/admin123)
-* 项目部署及配置：http://www.smaty.net/t/xapi-manager (安装和升级请参考手册)
-* 欢迎大家加入QQ交流群(623709829)，共同探讨一些技术问题、交流一些想法。
-
 ### v2.0 版本说明
 
-1. 安装页面
-2. 企业密钥
-3. 环境及全局参数设置
-4. 分权管理
-5. 多项目管理
-6. 消息中心
-7. 若干操作优化
+v2.0版本进行了一次大的重构，支持了多项目多环境、企业密钥等若干改进和优化，欢迎大家下载使用，如果您在使用中遇到什么问题请及时向我们反馈。同时欢迎大家加入QQ交流群(623709829)，共同探讨一些技术问题、交流一些想法。
+
+官方地址：http://xapi.smaty.net/ （admin/admin123）
+项目部署及配置：http://www.smaty.net/t/xapi-manager (安装和升级请参考手册)
+开源图书社区: http://www.smaty.net
 
 * 码云地址：https://git.oschina.net/duolatech/xapimanager
 * github地址：https://github.com/duolatech/xApi-Manager
