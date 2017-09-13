@@ -124,10 +124,13 @@ class DebugController extends Controller
         $data = $_POST;        
         //请求参数
         $param = array();
-        $paramInfo = fieldParamSort($data['param']['request'], 'field');
-        foreach ($paramInfo as $value){
-            if(!empty($value['field'])){
-                $param[$value['field']] = $value['value'];
+        $paramInfo = array();
+        if(!empty($data['param']['request'])){
+            $paramInfo = fieldParamSort($data['param']['request'], 'field');
+            foreach ($paramInfo as $value){
+                if(!empty($value['field'])){
+                    $param[$value['field']] = $value['value'];
+                }
             }
         }
         //请求链接
@@ -136,10 +139,13 @@ class DebugController extends Controller
         
         //header头信息
         $headers = array();
-        $headerInfo = fieldParamSort($data['param']['header'], 'field');
-        foreach ($headerInfo as $value){
-            if(!empty($value['field'])){
-                $headers[] = $value['field'].': '.$value['value'];
+        $headerInfo = array();
+        if(!empty($data['param']['header'])){
+            $headerInfo = fieldParamSort($data['param']['header'], 'field');
+            foreach ($headerInfo as $value){
+                if(!empty($value['field'])){
+                    $headers[] = $value['field'].': '.$value['value'];
+                }
             }
         }
         //Api请求

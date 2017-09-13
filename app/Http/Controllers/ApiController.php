@@ -582,10 +582,20 @@ class ApiController extends Controller
 		$editor[] = session::get('uid');
 		//格式化数据
 		$network = !empty($data['network']) ? $data['network'] : array(2);
-		$header = fieldParamSort($data['param']['header'], 'field');
-		$request = fieldParamSort($data['param']['request'], 'field');
-		$response = fieldParamSort($data['param']['response'], 'field');
-		$statuscode = fieldParamSort($data['scode'], 'status');
+		$field = array('header', 'request', 'response');
+		foreach ($field as $value){
+		    if(!empty($data['param'][$value])){
+		        $$value = fieldParamSort($data['param'][$value], 'field');
+		    }else{
+		        $$value = array ( 0 => array ( 'field' => '', 'fieldType' => '1', 'must' => '1', 'des' => ''));
+		    }
+		}
+		if(!empty($data['scode'])){
+		    $statuscode = fieldParamSort($data['scode'], 'status');
+		}else{
+		    $statuscode = array ( 0 => array ( 'status' => '200', 'des' => '成功'));
+		}
+		
         if(!empty($detail)){
             $detail->listid = $listid;
             $url = parse_url($data['gateway']);

@@ -251,6 +251,5 @@
 			</script>
 		</div>
 	</div>
-</div>
 <!-- /.page-content -->
 @endsection

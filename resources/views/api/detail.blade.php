@@ -156,7 +156,7 @@
     												<tr>
     													<td class="text-center">{{$value['field'] or ''}}</td>
     													<td>
-    													@if(!empty($value['fieldType'])){
+    													@if(!empty($value['fieldType']))
     														@if($value['fieldType']==1) string @endif
     														@if($value['fieldType']==2) number @endif
     														@if($value['fieldType']==3) object @endif
@@ -201,7 +201,7 @@
 													<tr>
     													<td class="text-center">{{$value['field'] or ''}}</td>
     													<td>
-    														@if(!empty($value['fieldType'])){
+    														@if(!empty($value['fieldType']))
         														@if($value['fieldType']==1) string @endif
         														@if($value['fieldType']==2) number @endif
         														@if($value['fieldType']==3) object @endif
@@ -244,7 +244,7 @@
 													<tr>
     													<td class="text-center">{{$value['field'] or ''}}</td>
     													<td>
-    														@if(!empty($value['fieldType'])){
+    														@if(!empty($value['fieldType']))
         														@if($value['fieldType']==1) string @endif
         														@if($value['fieldType']==2) number @endif
         														@if($value['fieldType']==3) object @endif

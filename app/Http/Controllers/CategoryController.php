@@ -162,9 +162,8 @@ class CategoryController extends Controller
         $list['site'] = $request['sys']['Website'];
         $list['time'] = date('Y-m-d', time());
         
-        //dd($list);
         //输出doc文件
-        return view('Category.doc', ['data'=>$list]);
+        return view('category.doc', ['data'=>$list]);
         
     }
     /**
