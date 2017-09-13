@@ -72,7 +72,7 @@ class CategoryController extends Controller
         $info['classify'] = !empty($all) ? $all->toArray() : array();
         $info['currentClassify'] = Input::get('classifyId');
         
-        return view('Category.infoSub', ['info'=>$info]);
+        return view('category.infoSub', ['info'=>$info]);
     }
     /**
      * 分类存储
