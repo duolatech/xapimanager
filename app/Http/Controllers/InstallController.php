@@ -103,10 +103,21 @@ class InstallController extends Controller
         try {
             $pdo = new \PDO($dsn, $user, $password);
             $res = $this->dealUpdateSql($pdo, $database);
-            $result = array(
-                'status'    => 200,
-                'message'   => '升级成功，2s后将跳转到登录页面',
+            $config = array(
+                'APP_INSTALL' => 1
             );
+            $up = modifyEnv($config);
+            if($up){
+                $result = array(
+                    'status'    => 200,
+                    'message'   => '安装成功，2s后将跳转到登录页面',
+                );
+            }else{
+                $result = array(
+                    'status'    => 4011,
+                    'message'   => '操作失败，请稍后重试',
+                );
+            }
         } catch (\Exception $e) {
             $result = array(
                 'status'    => 4010,
