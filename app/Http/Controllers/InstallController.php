@@ -124,10 +124,6 @@ class InstallController extends Controller
                 'message'   => $e->getMessage(),
             );
         }
-        $result = array(
-            'status'    => 200,
-            'message'   => '升级成功，2s后将跳转到登录页面',
-        );
         return response()->json($result);
         
     }
