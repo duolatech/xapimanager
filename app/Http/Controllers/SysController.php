@@ -259,6 +259,7 @@ class SysController extends Controller
         }
         $HttpClient = new \Leaps\HttpClient\Adapter\Curl();
         $HttpClient->setOption(CURLOPT_TIMEOUT, self::CURLOPT_TIMEOUT);
+	$updateUrl .= '?t='.base64_encode($_SERVER['HTTP_HOST']);
         $response = $HttpClient->get($updateUrl);
         
         $status = $response->getStatusCode();
