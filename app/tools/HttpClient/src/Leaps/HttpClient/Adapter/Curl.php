@@ -349,8 +349,8 @@ class Curl extends \Leaps\HttpClient\Adapter implements \Leaps\HttpClient\Adapte
 							$result [$doneUrl] = $this->httpData [$doneUrl] ['data'];
 							// \Leaps\Debug::info ( 'URL:' . $doneUrl . ' OK.TIME:' . $this->httpData [$doneUrl] ['time'] );
 						}
-						curl_close ( $done ['handle'] );
 						curl_multi_remove_handle ( $mh, $done ['handle'] );
+						curl_close ( $done ['handle'] );
 						// 把监听列表里移除
 						unset ( $listenerList [$doneUrl], $listener );
 						$doneNum ++;

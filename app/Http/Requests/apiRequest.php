@@ -25,7 +25,7 @@ class apiRequest extends FormRequest
     {
         return [
             'apiname' => 'required|min:2|max:20',
-            'version' => 'required|min:2|max:4',
+            'version' => 'required|min:2|max:12',
             'subClassify'=> 'required',
             'gateway' => array('regex:/^\/[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/i'),
             'local' => array('regex:/^((https|http)?:\/\/)+[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*/i'),

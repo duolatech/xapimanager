@@ -648,7 +648,7 @@
       					},
       					version:{
       						required:true,
-      						maxlength:4,
+      						maxlength:12,
       						minlength:2
       					},
       					gateway:{
@@ -674,7 +674,7 @@
       					},
       					version :{
       						required:"接口版本不能为空",
-      						maxlength:"不能超过4个字符",
+      						maxlength:"不能超过12个字符",
       						minlength:"不能少于2个字符",
       					},
       					gateway:{

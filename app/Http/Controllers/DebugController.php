@@ -36,6 +36,7 @@ class DebugController extends Controller
         $data = array();
         $data['param']['header'] = array(1,2);
         $data['param']['request'] = array(1,2);
+		$data['param']['requestType'] = 'GET';
         if(!empty(Input::get('did'))){
             $did = Input::get('did');
             //接口名称
@@ -47,6 +48,7 @@ class DebugController extends Controller
             //接口参数
             $data['param']['header'] = !empty($data['detail']['header']) ? json_decode($data['detail']['header'], true) : array();
             $data['param']['request'] = !empty($data['detail']['request']) ? json_decode($data['detail']['request'], true) : array();
+			$data['param']['requestType'] = !empty($data['detail']['type']) ? $this->type[$data['detail']['type']] : 'GET';
         }
         if(!empty(Input::get('sid'))){
             $sid = Input::get('sid');
@@ -113,7 +115,6 @@ class DebugController extends Controller
             'param'     => $data['param'],
             'apiurl'    => !empty($data['detail']['gateway']) ? $data['detail']['gateway'] : ''
         );
-        
         return view('debug.index', ['data'=>$result]);
     }
     /**

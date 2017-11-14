@@ -63,14 +63,14 @@
 												<button type="button" class="btn btn-default"
 													dropdown-toggle="" aria-haspopup="true"
 													aria-expanded="false">
-													<label2 class="btn-request-type">GET</label2> <span class="caret"></span>
+													<label2 class="btn-request-type">{{$data['param']['requestType'] or 'GET'}}</label2> <span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu">
 												@foreach($data['type'] as $value)
                 									<li><a href="javascript:void(0);">{{$value}}</a></li>
                 								@endforeach
 												</ul>
-												<input type="hidden" name="type" value="GET">
+												<input type="hidden" name="type" value="{{$data['param']['requestType'] or 'GET'}}">
 											</div>
 											<!-- /btn-group -->
 											<input type="text" name="apiurl" class="form-control" placeholder="请带上http/https" value="{{$data['apiurl'] or ''}}">
