@@ -46,14 +46,14 @@
 		<!-- nabar right -->
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown hidden-sm" is-open="lang.isopen" dropdown=""
-				id="select_env"><a href="javascrpit:void(0);"
+				id="select_env"><a href="javascript:void(0);"
 				class="dropdown-toggle ng-binding current_env" dropdown-toggle=""
 				aria-haspopup="true" aria-expanded="false"><span env="0"> 请选择环境</span><b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu animated fadeInRight w all_env">
 					@foreach($sys['ApiEnv'] as $env)
 					<li class="ng-scope">
-						<a href="javascrpit:void(0);" class="ng-binding"><span env="{{$env['id']}}" domain="{{$env['domain'] or ''}}">{{$env['envname']}}</span></a>
+						<a href="javascript:void(0);" class="ng-binding"><span env="{{$env['id']}}" domain="{{$env['domain'] or ''}}">{{$env['envname']}}</span></a>
 					</li>
 					@endforeach
 				</ul>
