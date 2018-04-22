@@ -2,7 +2,8 @@
 SQLyog Professional v12.09 (64 bit)
 MySQL - 5.7.11 : Database - xapi2
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -50,6 +51,7 @@ DROP TABLE IF EXISTS `mx_apienv`;
 
 CREATE TABLE `mx_apienv` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `proid` int(11) NOT NULL COMMENT '项目id',
   `envname` varchar(60) DEFAULT NULL COMMENT '环境名称',
   `domain` varchar(200) NOT NULL COMMENT '环境域名',
   `status` tinyint(11) DEFAULT '1' COMMENT '状态(1启用,2禁用)',
