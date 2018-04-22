@@ -194,6 +194,7 @@ ALTER TABLE `mx_apidetail` ADD `response_type` TINYINT(1) NOT NULL DEFAULT '1' C
 
 ALTER TABLE `mx_classify` CHANGE `description` `description` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类描述';
 ALTER TABLE `mx_apienv` ADD `domain` VARCHAR(200) NOT NULL COMMENT '环境域名' AFTER `envname`;
+ALTER TABLE `mx_apienv` ADD proid int(11) default '1' comment '项目id' after id ;
 ALTER TABLE `mx_user` CHANGE `avatar` `avatar` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户头像';
 ALTER TABLE `mx_auth_group` ADD `description` VARCHAR(300) NOT NULL COMMENT '组权限描述' AFTER `groupname`;
 ALTER TABLE `mx_auth_group` ADD `operate` VARCHAR(100) NOT NULL COMMENT '操作' AFTER `rules`;
