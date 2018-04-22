@@ -11,6 +11,7 @@ use App\Models\ProjectToggle;
 use App\Models\User;
 use App\Models\AuthData;
 use App\Models\AuthGroup;
+use App\Models\ApiEnv;
 use Input;
 class ProjectController extends Controller
 {
@@ -116,7 +117,9 @@ class ProjectController extends Controller
         if($info!==false){
             //清除所有缓存
             Cache::flush();
-            return response()->json(['status'=>200, 'message'=>'切换成功，2s后将刷新本页面']);
+            $envid = ApiEnv::where(['proid'=>$proid])->orderBy('id','asc')->limit(1)->value('id');
+            $data = array('envid'=>$envid);
+            return response()->json(['status'=>200, 'message'=>'切换成功，2s后将刷新本页面', 'data'=>$data]);
         }else{
             return response()->json(['status'=>2010, 'message'=>'切换失败，请稍后重试']);
         }

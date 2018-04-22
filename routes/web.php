@@ -137,3 +137,7 @@ Route::group(['prefix'=>'/Install'], function(){
 Route::group(['prefix'=>'/Export','middleware'=>'isAuth'], function(){
     Route::get('v1/subClassify/{cid}', ['as'=>'Export.subClassify', 'uses'=>'ExportController@subClassify']);
 });
+//mock测试
+Route::group(['prefix'=>'/Mock'], function(){
+    Route::get('{name}', ['as'=>'mock.index', 'uses'=>'MockController@index'])->where('name', '[a-zA-Z0-9\/\-]+');
+});

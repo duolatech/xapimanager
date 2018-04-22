@@ -78,6 +78,7 @@
 				                success: function(res) {
 				                	layer.msg(res.message)
 				                	if(res.status==200){
+										$.cookie('env', res.data.envid, {expires:30,path:'/'});
 				                		setTimeout(function(){
 				                			window.location.reload();
 										 }, 2000);

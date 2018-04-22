@@ -327,7 +327,7 @@ class ApiController extends Controller
         }
         $data = $this->ApiDetail();
         $data['envinfo'] = implode(' > ', $env);
-        
+
         return view('api.detail', ['data'=>$data]);
     }
     /**
@@ -417,6 +417,9 @@ class ApiController extends Controller
             }
             //去掉返回示例中的空白字符
             $data['detail']['example'] = str_replace(array(" ","　","\t","\n","\r"), array("","","","",""), $data['detail']['goback']);
+            
+            $mockUrl = is_HTTPS() ? 'https://' : 'http://';
+            $data['detail']['mockUrl'] = $mockUrl.$_SERVER["HTTP_HOST"].'/Mock'.$data['detail']['gateway'];
         }
         return $data;
     }
@@ -732,6 +735,7 @@ class ApiController extends Controller
         if(empty($list)){
             $list = new ApiList();
         }
+        $list->proid = $this->proid;
         $list->envid = $next_env;
         $list->classify = $data['classify'];
         $list->apiname = $data['apiname'];
@@ -767,6 +771,9 @@ class ApiController extends Controller
         );
         foreach ($field as $value){
             $detail->$value = $data[$value];
+            if($value=='mtime'){
+                $detail->$value = time();
+            }
         }
         $detail->save();
         

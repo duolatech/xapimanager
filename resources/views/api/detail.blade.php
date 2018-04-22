@@ -21,7 +21,7 @@
 							<div class="m-l font-bold">
                               <span class="col-lg-2 control-label">
                               		<a href="{{route('Api.info')}}?did={{$data['detail']['id']}}" class="btn m-b-xs w-xs btn-primary">修 改</a> 
-                              </span>
+							  </span>
                               <span class="col-lg-6 form-control-static">
                               		@if($data['detail']['status'] == 1) 
             							<a href="javascript:void(0);" did={{$data['detail']['id']}} class="btn m-b-xs w-xs btn-success operate" type="2"> 发布 </a>
@@ -97,6 +97,21 @@
                               		<label>{{$data['detail']['local'] or ''}}</label>
                               </span>
                             </div>
+							
+							<div class="line line-dashed b-b pull-in"></div>
+							<div class="m-l">
+                              <span class="col-lg-2 control-label">mock 地址：</span>
+                              <span class="col-lg-6 form-control-static">
+                              		<label>{{$data['detail']['mockUrl'] or ''}}</label>
+									<label class="m-l-md">
+										<i class="icon-question mockdes"></i>
+									</label>
+									<label class="m-l-md">
+										<a href="{{$data['detail']['mockUrl'] or ''}}" target="_blank"  class="text-primary m-b-sm m-t-sm block">前往</a>
+									</label>
+                              </span>
+                            </div>
+
 							<div class="line line-dashed b-b pull-in"></div>
 							
 							<div class="m-l">
@@ -283,6 +298,7 @@
                 							<label>HTML</label> 
             							@endif
             						@endif
+
             						<div class="m-t-sm" name="goback" id="goback-highlight" >
             							
 									</div>
@@ -384,6 +400,13 @@
 				            },
 				        });
 					}
+					//mock地址说明
+					$(".mockdes").click(function(){
+						layer.tips('添加或编辑Api时，选择响应数据类型和添加响应数据后，可直接通过该接口进行mock测试', '.mockdes', {
+							tips: [1, '#3595CC'],
+							time: 5000
+						});
+					})
 				})
 			</script>
 		</div>

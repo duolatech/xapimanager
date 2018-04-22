@@ -141,9 +141,25 @@ class SysController extends Controller
     /**
      * Api环境选择
      */
-    public function sysenv(){
+    public function sysenv(Request $request){
         
-        $apienv = ApiEnv::orderBy('status','asc')->get();
+        //当前项目id
+        if(!empty($request['sys']['Project']['proid'])){
+            $proid = $request['sys']['Project']['proid'];
+        }else{
+            $proid = 0;
+        }
+        $envCount = ApiEnv::where(array('proid'=>$proid))->count();
+        $defaultEnv = array(
+            0=> array('proid'=>$proid,'envname'=>'测试环境','domain'=>'http://api.test.smaty.net','status'=>1),
+            1=> array('proid'=>$proid,'envname'=>'集成环境','domain'=>'http://api.sit.smaty.net','status'=>1),
+            2=> array('proid'=>$proid,'envname'=>'预发布环境','domain'=>'http://api.pre.smaty.net','status'=>1),
+            3=> array('proid'=>$proid,'envname'=>'线上环境','domain'=>'http://api.smaty.net','status'=>1),
+        );
+        if($envCount==0){
+            ApiEnv::insert($defaultEnv);
+        }
+        $apienv = ApiEnv::where(array('proid'=>$proid))->orderBy('id','asc')->get();
         $apienv = !empty($apienv) ? $apienv->toArray() : array();
         
         return view('sys.env', ['data'=>$apienv]);

@@ -191,7 +191,8 @@ class GlobalService
         
         $apienv = cache::get('apienv');
         if(empty($apienv)){
-            $apienv = ApiEnv::where('status', 1)->get();
+            $proid = ProjectToggle::where(['uid'=>$this->uid])->value('proid');
+            $apienv = ApiEnv::where(['proid'=>$proid,'status'=>1])->get();
             $apienv = !empty($apienv) ? $apienv->toArray() : array();
             Cache::put('apienv', $apienv, self::CHCHETIME);
         }
