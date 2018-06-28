@@ -119,7 +119,7 @@
 			</a> 
 			</li>
 			<li class="dropdown" dropdown="" id="personal"><a
-				href="javascrpit:void(0);"
+				href="javascript:void(0);"
 				class="dropdown-toggle clear personalinfo" dropdown-toggle=""
 				aria-haspopup="true" aria-expanded="false"> <span
 					class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"> <img
