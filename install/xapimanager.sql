@@ -60,7 +60,7 @@ CREATE TABLE `mx_apienv` (
 
 /*Data for the table `mx_apienv` */
 
-insert  into `mx_apienv`(`id`,`envname`,`domain`,`status`) values (1,'测试环境','http://api.test.smaty.net',1),(2,'集成环境','http://api.sit.smaty.net',1),(3,'预发布环境','http://api.pre.smaty.net',1),(4,'线上环境','http://api.smaty.net',1);
+insert  into `mx_apienv`(`id`,`proid`,`envname`,`domain`,`status`) values (1,1,'测试环境','http://api.test.smaty.net',1),(2,1,'集成环境','http://api.sit.smaty.net',1),(3,1,'预发布环境','http://api.pre.smaty.net',1),(4,1,'线上环境','http://api.smaty.net',1);
 
 /*Table structure for table `mx_apilist` */
 
