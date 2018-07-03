@@ -115,7 +115,7 @@
 		    				};
 						//表单验证
 		      			jQuery.validator.addMethod("UrlCheck", function(value, element) {       
-		      				return this.optional(element) || /^((https|http)?:\/\/)+[A-Za-z0-9]+(\.[A-Za-z0-9]+)+(\/)?$/.test(value);      
+		      				return this.optional(element) || /^((https|http)?:\/\/)+[A-Za-z0-9]+(\.[A-Za-z0-9]+)+((:)+[0-9]{1,5})?(\/)?$/.test(value);    
 		      			}, "请输入正确的域名地址");
 						var validator = obj.validate(validation);
             		});

@@ -139,5 +139,5 @@ Route::group(['prefix'=>'/Export','middleware'=>'isAuth'], function(){
 });
 //mock测试
 Route::group(['prefix'=>'/Mock'], function(){
-    Route::get('{name}', ['as'=>'mock.index', 'uses'=>'MockController@index'])->where('name', '[a-zA-Z0-9\/\-]+');
+    Route::get('{name}', ['as'=>'mock.index', 'uses'=>'MockController@index'])->where('name', '[a-zA-Z0-9\/\-\_]+');
 });

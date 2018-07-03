@@ -26,7 +26,7 @@ class envRequest extends FormRequest
         return [
             'envname' => 'required',
             'envid'=> 'required',
-            'domain' => array('regex:/^((https|http)?:\/\/)+[A-Za-z0-9]+(\.[A-Za-z0-9]+)+(\/)?$/i'),
+            'domain' => array('regex:/^((https|http)?:\/\/)+[A-Za-z0-9]+(\.[A-Za-z0-9]+)+((:)+[0-9]{1,5})?(\/)?$/i'),
         ];
     }
 	/**
