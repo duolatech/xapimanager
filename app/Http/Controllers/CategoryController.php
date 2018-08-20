@@ -110,11 +110,12 @@ class CategoryController extends Controller
     }
     /**
      * 查询分类信息
+     * @param $proid 项目id 
      * @param $cid 分类id
      */
-    public function getClassify($cid){
+    public function getClassify($proid, $cid){
         
-        $data = Classify::where(['id'=>$cid, 'status'=>1])->first();
+        $data = Classify::where(['proid'=>$proid,'id'=>$cid, 'status'=>1])->first();
         $info = !empty($data) ? $data->toArray() : array();
         
         return $info;
