@@ -30,12 +30,14 @@ class ExportController extends Controller
 		}
 		$classifyname = !empty($class['classifyname']) ? $class['classifyname'] : '无';
 		$filename = iconv('utf-8', 'gb2312', $classifyname);  
+	    $content =  iconv('utf-8', 'gb2312', $content);
         header('pragma:public');  
         header('Content-type:application/vnd.ms-word;charset=utf-8;name="'.$filename.'".doc');  
         header("Content-Disposition:attachment;filename=$filename.doc");//attachment新窗口打印inline本窗口打印  
         $html = '<html xmlns:o="urn:schemas-microsoft-com:office:office"  
         xmlns:w="urn:schemas-microsoft-com:office:word"  
-        xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';//这句不能少，否则不能识别图片  
+        xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>';//这句不能少，否则不能识别图片  
+        echo $html;
         echo $content;exit;
     }
     /**
