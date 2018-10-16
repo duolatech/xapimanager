@@ -111,7 +111,7 @@ Route::group(['prefix'=>'/Sys', 'middleware'=>'isAuth'], function(){
     Route::get('site', ['uses'=>'SysController@site']);
     Route::get('project', ['uses'=>'SysController@project']);
     Route::post('siteStore', ['as'=>'site.store', 'uses'=>'SysController@siteStore']);
-    Route::get('env', ['uses'=>'SysController@sysenv']);
+    Route::get('env', ['as'=>'sys.env','uses'=>'SysController@sysenv']);
     Route::post('env/store', ['as'=>'env.store', 'uses'=>'SysController@envStore']);
     Route::get('log', ['uses'=>'SysController@log']);
     Route::get('log/detail', ['uses'=>'SysController@detailLog']);

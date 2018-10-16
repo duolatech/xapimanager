@@ -230,7 +230,7 @@
 			                	layer.msg(res.message)
 			                	if(res.status==200){
 			                		setTimeout(function(){
-										 window.location.href="/";
+										 window.location.href="{{route('sys.env')}}";
 									 }, 2000);
 			                	}
 			                },

@@ -85,10 +85,22 @@ class ProjectController extends Controller
             }
             $aData = AuthData::insert($authData);
         }
+        //切换到新创建的项目
+        $proid = $pro->id;
+        if(!empty($proid)){
+            $uid = session::get('uid');
+            $data = ProjectToggle::where('uid', $uid)->first();
+            if(!empty($data->id)){
+                $toggle = ProjectToggle::where('uid', $uid)->update(['proid'=>$proid]);
+            }else{
+                $toggle = ProjectToggle::insert(['uid'=>$uid, 'proid'=>$proid]);
+            }
+        }
+
         if(!empty($info)){
             //清除所有缓存
             Cache::flush();
-            return response()->json(['status'=>200, 'message'=>'保存成功，2s后将跳转到控制台']);
+            return response()->json(['status'=>200, 'message'=>'保存成功，2s后将跳转该项目的系统环境设置页']);
         }else{
             return response()->json(['status'=>4010, 'message'=>'保存失败，请稍后重试！']);
         }
