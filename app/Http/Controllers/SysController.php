@@ -143,12 +143,17 @@ class SysController extends Controller
      */
     public function sysenv(Request $request){
         
+        $proid = Input::get('proid');
+        $proid = intval($proid);
         //当前项目id
-        if(!empty($request['sys']['Project']['proid'])){
-            $proid = $request['sys']['Project']['proid'];
-        }else{
-            $proid = 0;
+        if(empty($proid)){
+            if(!empty($request['sys']['Project']['proid'])){
+                $proid = $request['sys']['Project']['proid'];
+            }else{
+                $proid = 0;
+            }
         }
+        $proname = Project::where(['id'=>$proid])->value('proname');
         $envCount = ApiEnv::where(array('proid'=>$proid))->count();
         $defaultEnv = array(
             0=> array('proid'=>$proid,'envname'=>'测试环境','domain'=>'http://api.test.smaty.net','status'=>1),
@@ -162,7 +167,7 @@ class SysController extends Controller
         $apienv = ApiEnv::where(array('proid'=>$proid))->orderBy('id','asc')->get();
         $apienv = !empty($apienv) ? $apienv->toArray() : array();
         
-        return view('sys.env', ['data'=>$apienv]);
+        return view('sys.env', ['data'=>$apienv, 'proname'=>$proname]);
     }
     /**
      * 更新Api环境

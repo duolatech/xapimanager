@@ -21,7 +21,7 @@
                         </div>
                         <ul class="list-group">
                           <li class="list-group-item">
-                            <a href="/Sys/env">
+                            <a href="/Sys/env?proid={{$value['id'] or ''}}">
                             	<i class="icon-pencil text-success m-r-xs" target="_blank"></i> 系统环境设置
                             </a>
                           </li>

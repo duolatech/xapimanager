@@ -7,6 +7,13 @@
 	<div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
 		<!-- main -->
 		<div class="col">
+		<div class="bg-light lter b-b wrapper-md">
+				<div class="row">
+					<div class="col-sm-6 col-xs-12">
+						<h1 class="m-n font-thin h3 text-black">{{$proname or '默认项目'}}</h1>
+					</div>
+				</div>
+			</div>
 			<!-- content -->
 			<div class="wrapper-md ng-scope">
 					<div class="row">
