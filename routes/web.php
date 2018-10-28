@@ -18,6 +18,7 @@ Route::group(['prefix'=>'/Project','middleware'=>'isAuth'], function(){
     Route::get('edit', ['as'=>'project.edit', 'uses'=>'ProjectController@edit']);
     Route::post('store', ['as'=>'project.store', 'uses'=>'ProjectController@store']);
     Route::post('toggle', ['as'=>'project.toggle', 'uses'=>'ProjectController@toggle']);
+    Route::post('envToggle', ['as'=>'project.envToggle', 'uses'=>'ProjectController@envToggle']);
 });
 //登录相关
 Route::group(['namespace'=>'Auth'], function(){

@@ -37,10 +37,10 @@
 		$(".navi-wrap").on("click", '.navbarmenu li', function(event, a, b) {
 
 			$(".navbarmenu li").removeClass('active');
-			if ($(this).data('status') == 'on') {
-				$(this).removeClass('active').data('status', 'off');
+			if ($(this).attr('status') == 'on') {
+				$(this).removeClass('active').attr('status', 'off');
 			} else {
-				$(this).addClass('active').data('status', 'on');
+				$(this).addClass('active').attr('status', 'on');
 			}
 
 		});

@@ -128,11 +128,12 @@ class CategoryController extends Controller
         
         //查询分类信息
         $class = $this->getClassify($this->proid, $cid);
+        $envid = $request['sys']['Project']['env']['id'];
         //子分类id
         $subIds = array($cid);
         //分类接口详情信息
         $param = array(
-            'envid' =>intval(Input::get('envid')),
+            'envid' =>intval($envid),
             'classify' => $subIds,
         );
         $status = array(1,2,3);

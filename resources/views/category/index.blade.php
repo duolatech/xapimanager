@@ -55,14 +55,12 @@
 			<script type="text/javascript" charset="utf-8">
 				$(".subClassify").click(function(){
 					var id = $(this).attr('id');
-					var env = $.cookie('env');
-					window.location.href='/Api/list?type=search&envid='+env+'&subClassify='+id;
+					window.location.href='/Api/list?type=search&subClassify='+id;
 				})
 				//导出word文档
 				$(".btn-export").click(function(){
 					var cid = $(this).attr('cid');
-					var env = $.cookie('env');
-					window.location.href='/Export/v1/subClassify/'+cid+'?envid='+env;
+					window.location.href='/Export/v1/subClassify/'+cid;
 				})
 			</script>
 		</div>

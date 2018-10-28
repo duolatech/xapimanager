@@ -37,9 +37,9 @@ class GroupController extends Controller
     }
     public function index()
     {
-        $group = AuthGroup::get();
+        $group = AuthGroup::where(['status'=>1])->get();
         $group = !empty($group) ? $group->toArray() : array();
-        
+
         return view('group.index', ['group'=>$group]);
     }
     /**

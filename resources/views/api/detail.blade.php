@@ -80,14 +80,8 @@
 							<div class="m-l">
                               <span class="col-lg-2 control-label">gateway 地址：</span>
                               <span class="col-lg-6 form-control-static">
-                              		<label class="gatewayApi">{{$data['detail']['gateway'] or ''}}</label>
+                              		<label class="gatewayApi">{{$sys['Project']['env']['domain']}}{{$data['detail']['gateway'] or ''}}</label>
                               </span>
-                              <script type="text/javascript" charset="utf-8">
-                              		var env_domain = $.cookie('env_domain');
-                              		if(env_domain){
-										$(".gatewayApi").text(env_domain+"{{$data['detail']['gateway'] or ''}}")
-                                  	}
-                              </script>
                             </div>
 							<div class="line line-dashed b-b pull-in"></div>
 							
@@ -378,7 +372,7 @@
 				            url:"{{route('Api.operate')}}",
 				            data:{
 				                'did':did, 
-				                'envid':$.cookie('env'),
+				                'envid':"{{$sys['Project']['env']['id']}}",
 				                'type':type
 				            },
 				            headers: {

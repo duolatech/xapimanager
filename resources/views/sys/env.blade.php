@@ -83,9 +83,6 @@
 		    			                dataType: 'json',
 		    			                success: function(res) {
 		    			                	if(res.status==200){
-																	$.cookie('env', null, {expires:-1,path:'/'});
-																	$.cookie('env_name', null, {expires:-1,path:'/'});
-																	$.cookie('env_domain', null, {expires:-1,path:'/'});
 		    			                		layer.msg(res.message)
 		    			                	}else{
 		    			                		layer.msg(res.message);

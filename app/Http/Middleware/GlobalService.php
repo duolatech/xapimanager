@@ -16,6 +16,7 @@ use App\Models\Project;
 use App\Models\ProjectToggle;
 use App\Models\AuthData;
 use App\Models\Message;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
 class GlobalService
@@ -76,6 +77,8 @@ class GlobalService
             }elseif(!empty($this->uid)){
                 $result[$value] = $this->$action();
             }
+            //查询当前节点的父级节点id
+            $result['parentNode'] = $this->getParentNodeid();
         }
         return $result;
     
@@ -141,6 +144,7 @@ class GlobalService
             $value['child']=self::getMenu($value['id'], $rules);
         }
         
+
         return $info;
     }
     /**
@@ -235,6 +239,9 @@ class GlobalService
     public function getProject(){
         
         $sysProject = cache::get('sysProject');
+        if(!empty($sysProject) && empty($sysProject['env'])){
+            $sysProject = array();
+        }
         if(empty($sysProject)){
             //查询用户组所属项目
             $dataRule = AuthAccess::find($this->uid)->getGroupProject()->where('type',1)->get();
@@ -246,18 +253,25 @@ class GlobalService
             }
             $project = Project::where(['attribute'=>1,'status'=>1]);
             if(!empty($proids) && is_array($proids)){
-                $project = $project->orWhereIn('id', $proids);
+                $project = $project->orWhere(function ($query) use ($proids){
+                    $query->whereIn('id', $proids)->where(['status'=>1]);
+                });
             }
             $project = $project->get();
             $project = !empty($project) ? $project->toArray() : array();
             //查询用户当前选择项目
             $sysProject = array();
-            $pid = ProjectToggle::where(['uid'=>$this->uid])->value('proid');
+            $current = ProjectToggle::where(['uid'=>$this->uid])->first();
             foreach($project as $value){
-                $value['active'] = ($value['id']==$pid) ? 1 :0;
+                $value['active'] = ($value['id']==$current->proid) ? 1 :0;
                 $sysProject['info'][$value['id']] = $value;
-                $sysProject['proid'] = $pid;
+                $sysProject['proid'] = $current->proid;
             }
+            //当前项目的环境
+            $envid = !empty($current->envid) ? $current->envid : 0;
+            $apienv = ApiEnv::where(['proid'=>$current->proid,'id'=>$envid])->first();
+            $sysProject['env'] = !empty($apienv) ? $apienv->toArray() : array('id'=>0,'envname'=>'','domain'=>'');
+            
             Cache::put('sysProject', $sysProject, self::CHCHETIME);
         }
         return $sysProject;
@@ -292,6 +306,26 @@ class GlobalService
         }
         
         return $operation;
+    }
+    /**
+     * 查询当前节点的父级节点id
+     */
+    public function getParentNodeid(){
+
+        $uri = trim($_SERVER['REQUEST_URI'], '/');
+        $allNodeRule = cache::get('allNodeRule');
+        if(empty($allNodeRule)){
+            $allNode= AuthRule::where('isdel',2)->select('id', 'pid', 'path')->get();
+            $allNodeRule = !empty($allNode) ? $allNode->toArray() : array();
+        }
+        $result = 0;
+        foreach($allNodeRule as $val){
+            if(!empty($uri) && !empty($val['path']) && $uri==$val['path']){
+                $result = $val['pid'];
+            }
+        }
+        return $result;
+
     }
     
 }

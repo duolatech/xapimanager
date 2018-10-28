@@ -13,6 +13,7 @@ use App\Models\AuthData;
 use App\Models\AuthGroup;
 use App\Models\ApiEnv;
 use Input;
+use DB;
 class ProjectController extends Controller
 {
     /**
@@ -131,9 +132,40 @@ class ProjectController extends Controller
             Cache::flush();
             $envid = ApiEnv::where(['proid'=>$proid])->orderBy('id','asc')->limit(1)->value('id');
             $data = array('envid'=>$envid);
-            return response()->json(['status'=>200, 'message'=>'切换成功，2s后将刷新本页面', 'data'=>$data]);
+            return response()->json(['status'=>200, 'message'=>'项目切换成功，2s后将跳转到控制台', 'data'=>$data]);
         }else{
             return response()->json(['status'=>2010, 'message'=>'切换失败，请稍后重试']);
         }
+    }
+    /**
+     * 环境切换
+     */
+    public function envToggle(Request $request){
+        
+        //当前项目id
+        if(!empty($request['sys']['Project']['proid'])){
+            $proid = $request['sys']['Project']['proid'];
+        }else{
+            $proid = 0;
+        }
+        //获取环境id
+        $envid = Input::get('envid');
+        //检查项目切换表中是否存在envid字段
+        $sql = "SELECT * FROM information_schema.columns WHERE table_name = 'mx_project_toggle' AND column_name = 'envid'";
+        $arr = DB::select($sql);
+        if(empty($arr)){
+            $addSql = "ALTER table mx_project_toggle add `envid` tinyint DEFAULT 0 COMMENT '当前环境id'";
+            DB::statement($addSql);
+        }
+        $uid = session::get('uid');
+        $info = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->update(['envid'=>$envid]);
+        if($info!==false){
+            //清除所有缓存
+            Cache::flush();
+            return response()->json(['status'=>200, 'message'=>'环境切换成功']);
+        }else{
+            return response()->json(['status'=>2010, 'message'=>'切换失败，请稍后重试']);
+        }
+
     }
 }

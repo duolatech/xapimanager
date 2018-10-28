@@ -26,6 +26,7 @@ class ApiController extends Controller
     protected $apistatus; //接口状态(1已上线,2待发布,3废弃,4删除)
     protected $request_type; //请求类型
     protected $proid;
+    protected $envid;
     protected $request;
     
     public function __construct(Request $request){
@@ -35,8 +36,10 @@ class ApiController extends Controller
         //当前项目id
         if(!empty($this->request['sys']['Project']['proid'])){
             $this->proid = $this->request['sys']['Project']['proid'];
+            $this->envid = $this->request['sys']['Project']['env']['id'];
         }else{
             $this->proid = 0;
+            $this->envid = 0;
         }
         //分类数据
         $this->cls = cache::get('classify');
@@ -100,20 +103,20 @@ class ApiController extends Controller
         }
         $type = Input::get('type');
         if($type=='search'){
-            return $this->searchApiList($proid);
+            return $this->searchApiList($proid, $this->envid);
         }else{
-            return $this->normalApiList($proid);
+            return $this->normalApiList($proid, $this->envid);
         }
     }
     /**
      * 获取所有 Api列表
      * @return api列表
      */
-    public function normalApiList($proid){
+    public function normalApiList($proid, $envid){
         
         //获取查询条件
         $subClassifyId = Input::get('subClassify');
-        $envid = Input::get('env');
+        //$envid = Input::get('env');
         $page = Input::get('page');
         $page = !empty($page) ? $page : 1;
         $start = ($page - 1) * ($this->limit);
@@ -185,7 +188,7 @@ class ApiController extends Controller
      * 获取搜索符合条件的 Api列表，同一类型接口只显示匹配到的结果
      * @return api列表
      */
-    public function searchApiList($proid){
+    public function searchApiList($proid, $envid){
     
         $page = Input::get('page');
         $page = !empty($page) ? $page : 1;
@@ -214,7 +217,7 @@ class ApiController extends Controller
         //获取查询条件
         $param = array(
             'proid' => $proid,
-            'envid' =>intval(Input::get('envid')),
+            'envid' =>intval($envid),
             'classify' => $subClass,
             'apiname' => Input::get('apiname'),
             'URI'   => Input::get('URI'),
@@ -513,11 +516,11 @@ class ApiController extends Controller
         
         //防止post频繁快速提交
         Session::put('quickTime', time());
-        $envid = $request['sys']['ApiEnv'][0]['id'];
         $listid = Input::get('lid');
         $version_type = Input::get('version_type');
         $version_lid = Input::get('version_lid');
         $proid = $request['sys']['Project']['proid'];
+        $envid = $request['sys']['ApiEnv'][0]['id'];
         
         //保存接口列表
         if(!empty($envid)){

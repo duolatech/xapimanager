@@ -62,6 +62,7 @@
 			<script type="text/javascript" src="{{URL::asset('js/pagination/jquery.pagination.min.js')}}"></script>
 			<script type="text/javascript" charset="utf-8">
 				$(function(){
+					$(".app-footer").hide();
         			$('table').on('click', '.operate', function(){
         				var gid = $(this).parents('tr').attr('gid');
         				var groupname = $(this).parents('tr').attr('groupname');

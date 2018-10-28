@@ -18,7 +18,7 @@
 					@if(!empty($sys['ValidMenu'][1]))
 						@foreach($sys['ValidMenu'][1]['child'] as $navbar)	
 							@if($navbar['status']==1)
-							<li><a href="@if(!empty($navbar['child'])) javascript:; @else {{$navbar['path'] or ''}} @endif" class="auto"> 
+							<li @if($navbar['id']==$sys['parentNode']) class="active" status="on" @endif><a href="@if(!empty($navbar['child'])) javascript:; @else {{$navbar['path'] or ''}} @endif" class="auto"> 
 								<span class="pull-right text-muted">
 									@if(!empty($navbar['child']))
 										<i class="fa fa-fw fa-angle-right text"></i> 
@@ -78,9 +78,8 @@
 				                success: function(res) {
 				                	layer.msg(res.message)
 				                	if(res.status==200){
-										$.cookie('env', res.data.envid, {expires:30,path:'/'});
 				                		setTimeout(function(){
-				                			window.location.reload();
+				                			window.location.href="{{route('Index.index')}}";
 										 }, 2000);
 				                	}
 				                },

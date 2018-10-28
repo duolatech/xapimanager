@@ -73,13 +73,7 @@
 												<input type="hidden" name="type" value="{{$data['param']['requestType'] or 'GET'}}">
 											</div>
 											<!-- /btn-group -->
-											<input type="text" name="apiurl" class="form-control" placeholder="请带上http/https" value="{{$data['apiurl'] or ''}}">
-											<script type="text/javascript" charset="utf-8">
-                                              		var env_domain = $.cookie('env_domain');
-                                              		if(env_domain){
-                										$("input[name='apiurl']").val(env_domain+"{{$data['apiurl'] or ''}}")
-                                                  	}
-                                            </script>
+											<input type="text" name="apiurl" class="form-control" placeholder="请带上http/https" value="{{$sys['Project']['env']['domain']}}{{$data['apiurl'] or ''}}">
 										</div>
 									</div>
 									<div class="col-sm-4">

@@ -66,11 +66,9 @@
 			<script type="text/javascript" src="{{URL::asset('js/pagination/jquery.pagination.min.js')}}"></script>
 			<script type="text/javascript" charset="utf-8">
 
-    			var env = $.cookie('env');
     			ajaxApiList({
     				type:'search', 
     				page:1, 
-    				envid:env, 
     				status: '2,5'
     			},1);
     			//分页
@@ -86,7 +84,6 @@
     				        var data = {
     				        		type:'search',
     					            page: api.getCurrent(),
-    					            envid: env,
     					            apiname: $("input[name='apiname']").val(),
     					            author: $("input[name='author']").val(),
     					            status: status

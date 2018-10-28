@@ -22,9 +22,9 @@ class ExportController extends Controller
         //获取分类接口信息
         $content = '';
 		if(!empty($cid)){
-			$envid = Input::get('envid');
+			$envid = $request['sys']['Project']['env']['id'];
 	        $protocol = is_HTTPS() ? 'https' : 'http';
-			$url = $protocol.'://'.$_SERVER['HTTP_HOST'].'/Category/v1/subClassify/'.$cid.'?envid='.$envid;
+			$url = $protocol.'://'.$_SERVER['HTTP_HOST'].'/Category/v1/subClassify/'.$cid;
 			$content = $this->getPdfContent($url);
 			$class = $this->getClassify($cid);
 		}

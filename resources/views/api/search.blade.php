@@ -127,7 +127,6 @@
     			    //搜索
     			    $(".btn-search").click(function(){
     				    
-    			    	var env = $.cookie('env');
     			    	var apiname = $('input[name="apiname"]').val();
     			    	var classify = $('select[name="classify"]').val();
     			    	var subClassify = $('select[name="subClassify"]').val();
@@ -135,7 +134,6 @@
     			    	var author = $('input[name="author"]').val();
     
     			    	var url = "/Api/list?type=search";
-    			    	url+="&envid="+env;
     			    	url+="&apiname="+apiname;
     			    	if(classify!=0) url+="&classify="+classify;
     			    	if(subClassify!=0) url+="&subClassify="+subClassify;

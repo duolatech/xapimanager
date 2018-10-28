@@ -11,6 +11,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Api 列表</div>
     					<div class="pinyin m-t-sm">
+							<a class="btn btn-sm btn-primary m-l-xs classifyALL">ALL</a>
         					@foreach($list['letter'] as $value)
         						<a class="btn btn-sm btn-primary m-l-xs classifyLetter">{{$value}}</a>
         					@endforeach
@@ -65,9 +66,6 @@
 			<script type="text/javascript" src="{{URL::asset('js/pagination/jquery.pagination.min.js')}}"></script>
 			<script type="text/javascript" charset="utf-8">
 				$(function() {
-					var map = {
-						env : $.cookie('env')
-					};
 					var subcon = {};
 					//查询条件
 					var con = {
@@ -96,11 +94,17 @@
 						subcon = {
 							'subClassify' : subid
 						}
-						var data = $.extend({page:1}, map, subcon);
+						var data = $.extend({page:1}, subcon);
+						ajaxApiList(data,1);
+					})
+					//全部分类
+					$(".pinyin").on('click', '.classifyALL', function(){
+						//第一页数据
+						var data = $.extend({page:1}, con);
 						ajaxApiList(data,1);
 					})
 					//第一页数据
-					var data = $.extend({page:1}, map, con);
+					var data = $.extend({page:1}, con);
 					ajaxApiList(data,1);
 					
 					//分页

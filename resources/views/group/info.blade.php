@@ -73,8 +73,8 @@
 		                	if(res.status==200){
 		                		layer.msg(res.message);
 		                		setTimeout(function(){
-									 window.location.href="{{route('group.index')}}";
-								 }, 2000);
+									window.location.href="{{route('group.index')}}";
+								}, 2000);
 		                	}else{
 		                		layer.msg(res.message);
 		                	}

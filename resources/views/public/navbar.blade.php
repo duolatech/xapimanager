@@ -58,6 +58,7 @@
 					@endforeach
 				</ul>
 			</li>
+			<input type="hidden" value="{{ csrf_token() }}" name="_token" />
 			<script type="text/javascript" charset="utf-8">
 				$(function() {
 					$("#select_env").click(function() {
@@ -71,11 +72,11 @@
 						}
 					})
 					var env,env_name;
-					env = $.cookie('env');
-					env_name = $.cookie('env_name');
-					env_domain = $.cookie('env_domain');
+					env        = "{{$sys['Project']['env']['id']}}";
+					env_name   = "{{$sys['Project']['env']['envname']}}";
+					env_domain = "{{$sys['Project']['env']['domain']}}";
 					//初始化判断
-					if(env && env_name){
+					if(parseInt(env)>0){
 						$(".current_env span").replaceWith("<span env='"+env+"' domain='"+env_domain+"'>"+env_name+"</span>");
 						$(".all_env li").each(function(){
 							if($(this).find('a').attr('env') == env){
@@ -84,11 +85,9 @@
 						})
 					}else{
 						var startEnv = $(".all_env li:first a span");
-						$.cookie('env', startEnv.attr('env'), {expires:30,path:'/'});
-						$.cookie('env_name', startEnv.text(), {expires:30,path:'/'});
-						$.cookie('env_domain', startEnv.attr('domain'), {expires:30,path:'/'});
 						$(".current_env span").replaceWith($(".all_env li:first a").html());
 						$(".all_env li:first").hide();
+						envToggle(startEnv.attr('env'));
 					}
 					//环境切换
 					$(".all_env li").click(function(){
@@ -98,14 +97,30 @@
 						$(".current_env span").replaceWith($(this).find('a').html());
 						$(".all_env li").show();
 						$(this).hide();
-						$.cookie('env', env, {expires:30,path:'/'});
-						$.cookie('env_name', env_name, {expires:30,path:'/'});
-						$.cookie('env_domain', env_domain, {expires:30,path:'/'});
-						window.setTimeout(function(){
-							window.location.reload();
-						},100);
-						
+						envToggle(env);
 					});
+					//环境切换
+					function envToggle(envid){
+						$.ajax({
+				                cache: false,
+				                type: "POST",
+				                url:"{{route('project.envToggle')}}",
+				                data:{'envid':envid},
+				                headers: {
+				                    'X-CSRF-TOKEN': $("input[name='_token']").val()
+				                },
+				                dataType: 'json',
+				                success: function(res) {
+				                	layer.msg(res.message)
+									setTimeout(function(){
+				                		window.location.reload();
+									}, 100);
+				                },
+				                error: function(request) {
+				                    layer.msg("网络错误，请稍后重试");
+				                },
+				            });
+					}
 				})
 			</script>
 			<li class="hidden-xs"><a id="fullscreen"><i

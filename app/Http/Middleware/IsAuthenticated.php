@@ -50,12 +50,14 @@ class IsAuthenticated
         
         $allNode = cache::get('allNode');
         $ruleid = 0;
-        foreach($allNode as $value){
-            $path = preg_replace(array('/\//','/{\w+?}/'), array('\/', '\w+?'), $value['path']);
-            $pattern = '/^'.$path.'$/i';
-            if(preg_match($pattern, $node)){
-                $ruleid = $value['id'];
-                break;
+        if(!empty($allNode) && is_array($allNode)){
+            foreach($allNode as $value){
+                $path = preg_replace(array('/\//','/{\w+?}/'), array('\/', '\w+?'), $value['path']);
+                $pattern = '/^'.$path.'$/i';
+                if(preg_match($pattern, $node)){
+                    $ruleid = $value['id'];
+                    break;
+                }
             }
         }
         //当前用户权限
