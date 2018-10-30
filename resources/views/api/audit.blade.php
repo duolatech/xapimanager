@@ -139,7 +139,7 @@
     							if(key==0){
     								element +=  '	<td class="footable-visible footable-first-column v-middle" rowspan='+rowspan+'>'+item.apiname+'</td>';
     							}
-    							element +=  '	<td class="footable-visible"><a href="/Api/detail?did='+sub.id+'">'+sub.version+'</a></td>';
+    							element +=  '	<td class="footable-visible"><a href="/Api/detail?did='+sub.id+'&status=audit">'+sub.version+'</a></td>';
     							element +=  '	<td class="footable-visible" >【'+sub.type+"】"+sub.URI+'</td>';
     							element +=  '	<td class="footable-visible">'+sub.username+'</td>';
     							element +=  '	<td class="footable-visible">'+sub.ctime+'</td>';

@@ -117,9 +117,9 @@
 									page: api.getCurrent()
 								};
 								if(subcon.subClassify){
-									data = $.extend(data, map, subcon);
+									data = $.extend(data, subcon);
 								}else{
-									data = $.extend(data, map, con);
+									data = $.extend(data, con);
 								}
 								ajaxApiList(data, 0);
 							}

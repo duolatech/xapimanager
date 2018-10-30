@@ -237,7 +237,11 @@ class ApiController extends Controller
         //获取列表详情
         $ApiStatus = Input::get('status');
         if(!empty($ApiStatus)){
+            //待审核列表,忽略环境
             $status = explode(',', $ApiStatus);
+            if(in_array(2, $status) || in_array($status)){
+                unset($param['envid']);
+            }
         }else{
             $status = array(1,2,3,5);
         }
@@ -330,8 +334,14 @@ class ApiController extends Controller
         }
         $data = $this->ApiDetail();
         $data['envinfo'] = implode(' > ', $env);
+        $status = Input::get('status');
+        //待审核状态下，api均为初级环境（测试环境）
+        $sys = $request['sys'];
+        if(!empty($status) && $status=='audit'){
+            $sys['Project']['env']['domain'] = $apiEnv[0]['domain'];
+        }
 
-        return view('api.detail', ['data'=>$data]);
+        return view('api.detail', ['data'=>$data, 'sys'=>$sys]);
     }
     /**
      * 获取接口详情数据
