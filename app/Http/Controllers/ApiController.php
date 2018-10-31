@@ -21,7 +21,7 @@ use Input;
 class ApiController extends Controller
 {
     const CHCHETIME = 5*60;
-    protected $limit = 2;
+    protected $limit = 20;
     protected $cls;// 接口分类
     protected $apistatus; //接口状态(1已上线,2待发布,3废弃,4删除)
     protected $request_type; //请求类型
