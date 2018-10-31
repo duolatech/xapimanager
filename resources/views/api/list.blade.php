@@ -99,9 +99,7 @@
 					})
 					//全部分类
 					$(".pinyin").on('click', '.classifyALL', function(){
-						//第一页数据
-						var data = $.extend({page:1}, con);
-						ajaxApiList(data,1);
+						window.location.reload();
 					})
 					//第一页数据
 					var data = $.extend({page:1}, con);

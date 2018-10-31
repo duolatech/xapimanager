@@ -55,6 +55,7 @@ class GlobalService
                 )
             );
         }
+        //dd($request['sys']);
         //页面共享全局服务信息
         view()->share('sys', $request['sys']);
         
@@ -195,7 +196,7 @@ class GlobalService
         
         $apienv = cache::get('apienv');
         if(empty($apienv)){
-            $proid = ProjectToggle::where(['uid'=>$this->uid])->value('proid');
+            $proid = ProjectToggle::where(['uid'=>$this->uid, 'status'=>1])->value('proid');
             $apienv = ApiEnv::where(['proid'=>$proid,'status'=>1])->get();
             $apienv = !empty($apienv) ? $apienv->toArray() : array();
             Cache::put('apienv', $apienv, self::CHCHETIME);
@@ -261,7 +262,7 @@ class GlobalService
             $project = !empty($project) ? $project->toArray() : array();
             //查询用户当前选择项目
             $sysProject = array();
-            $current = ProjectToggle::where(['uid'=>$this->uid])->first();
+            $current = ProjectToggle::where(['uid'=>$this->uid, 'status'=>1])->first();
             foreach($project as $value){
                 $value['active'] = ($value['id']==$current->proid) ? 1 :0;
                 $sysProject['info'][$value['id']] = $value;

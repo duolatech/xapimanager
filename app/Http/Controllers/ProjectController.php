@@ -118,18 +118,27 @@ class ProjectController extends Controller
             $proids[] = $value['id'];
         }
         $info = false;
+
+        //检查项目切换表中是否存在envid字段
+        $sql = "SELECT * FROM information_schema.columns WHERE table_name = 'mx_project_toggle' AND column_name = 'status'";
+        $arr = DB::select($sql);
+        if(empty($arr)){
+            $addSql = "ALTER table mx_project_toggle add `status` tinyint DEFAULT 0 COMMENT '状态：1当前项目，0非当前项目'";
+            DB::statement($addSql);
+        }
         if(in_array($proid, $proids)){
             $uid = session::get('uid');
-            $data = ProjectToggle::where('uid', $uid)->first();
+            $data = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->first();
             if(!empty($data->id)){
-                $info = ProjectToggle::where('uid', $uid)->update(['proid'=>$proid]);
+                ProjectToggle::where(array('uid'=>$uid))->update(['status'=>0]);
+                $info = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->update(['status'=>1]);
             }else{
-                $info = ProjectToggle::insert(['uid'=>$uid, 'proid'=>$proid]);
+                $info = ProjectToggle::insert(['uid'=>$uid, 'proid'=>$proid, 'status'=>1]);
             }
         }
+        //清除所有缓存
+        Cache::flush();
         if($info!==false){
-            //清除所有缓存
-            Cache::flush();
             $envid = ApiEnv::where(['proid'=>$proid])->orderBy('id','asc')->limit(1)->value('id');
             $data = array('envid'=>$envid);
             return response()->json(['status'=>200, 'message'=>'项目切换成功，2s后将跳转到控制台', 'data'=>$data]);
@@ -159,9 +168,9 @@ class ProjectController extends Controller
         }
         $uid = session::get('uid');
         $info = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->update(['envid'=>$envid]);
+        //清除所有缓存
+        Cache::flush();
         if($info!==false){
-            //清除所有缓存
-            Cache::flush();
             return response()->json(['status'=>200, 'message'=>'环境切换成功']);
         }else{
             return response()->json(['status'=>2010, 'message'=>'切换失败，请稍后重试']);

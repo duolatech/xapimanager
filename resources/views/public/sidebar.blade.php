@@ -79,8 +79,8 @@
 				                	layer.msg(res.message)
 				                	if(res.status==200){
 				                		setTimeout(function(){
-				                			window.location.href="{{route('Index.index')}}";
-										 }, 2000);
+				                			window.location.href="{{route('Api.list')}}";
+										 }, 500);
 				                	}
 				                },
 				                error: function(request) {
