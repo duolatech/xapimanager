@@ -94,6 +94,7 @@ class UploadController extends Controller
         $img = Input::get('img');
         if(!empty($uid) && !empty($img)){
             $id = User::where(['uid'=>$uid])->update(['avatar'=>$img]);
+            Session::put('avatar', $img);
         }
         if(!empty($id)){
             return response()->json(

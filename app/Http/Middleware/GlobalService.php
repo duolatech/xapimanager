@@ -263,14 +263,15 @@ class GlobalService
             //查询用户当前选择项目
             $sysProject = array();
             $current = ProjectToggle::where(['uid'=>$this->uid, 'status'=>1])->first();
+            $proid = !empty($current->proid) ? $current->proid : 0;
             foreach($project as $value){
-                $value['active'] = ($value['id']==$current->proid) ? 1 :0;
+                $value['active'] = ($value['id']==$proid) ? 1 :0;
                 $sysProject['info'][$value['id']] = $value;
-                $sysProject['proid'] = $current->proid;
+                $sysProject['proid'] = $proid;
             }
             //当前项目的环境
             $envid = !empty($current->envid) ? $current->envid : 0;
-            $apienv = ApiEnv::where(['proid'=>$current->proid,'id'=>$envid])->first();
+            $apienv = ApiEnv::where(['proid'=>$proid,'id'=>$envid])->first();
             $sysProject['env'] = !empty($apienv) ? $apienv->toArray() : array('id'=>0,'envname'=>'','domain'=>'');
             
             Cache::put('sysProject', $sysProject, self::CHCHETIME);

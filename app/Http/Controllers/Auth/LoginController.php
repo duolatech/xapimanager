@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
+use App\Models\ProjectToggle;
+use App\Models\Project;
+use App\Models\ApiEnv;
 use Input, Log;
 use App\Models\User;
 
@@ -31,6 +35,7 @@ class LoginController extends Controller
                             $userInfo['avatar'] = '/img/avatar.jpg';
                         }
                         Session::put('avatar', $userInfo['avatar']);
+                        $this->project($userInfo['uid']);
                         return response()->json(['status'=>200, 'message'=>'登录成功']);
                     }else{
                         return response()->json(['status'=>4011, 'message'=>'用户名或密码错误']);
@@ -54,11 +59,43 @@ class LoginController extends Controller
         
     }
     /**
+     * 用户未指定项目时为用户指定一个当前项目
+     */
+    public function project($uid){
+
+        $project = Project::where(['attribute'=>1,'status'=>1]);
+            if(!empty($proids) && is_array($proids)){
+                $project = $project->orWhere(function ($query) use ($proids){
+                    $query->whereIn('id', $proids)->where(['status'=>1]);
+                });
+            }
+        $project = $project->get();
+        $project = !empty($project) ? $project->toArray() : array();
+
+        $arr = array_shift($project);
+        $proid = $arr['id'];
+        $data = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->first();
+        if(empty($data)){
+            $apienv = ApiEnv::where(['proid'=>$proid,'status'=>1])->orderBy('id','asc')->first();
+            $apienv = !empty($apienv) ? $apienv->toArray() : array();
+            $envid = !empty($apienv['id']) ? $apienv['id'] : 0;
+
+            $info = ProjectToggle::insert([
+                'uid'=>$uid, 
+                'proid'=>$proid, 
+                'envid'=>$envid, 
+                'status'=>1]
+            );
+        }
+    }
+    /**
      * 退出系统
      * @param Request $request
      */
     public function logout(Request $request){
         
+        //清除所有缓存
+        Cache::flush();
         $request->session()->flush();
         
         return redirect('Login/index');

@@ -133,7 +133,16 @@ class ProjectController extends Controller
                 ProjectToggle::where(array('uid'=>$uid))->update(['status'=>0]);
                 $info = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->update(['status'=>1]);
             }else{
-                $info = ProjectToggle::insert(['uid'=>$uid, 'proid'=>$proid, 'status'=>1]);
+                $apienv = ApiEnv::where(['proid'=>$proid,'status'=>1])->orderBy('id','asc')->first();
+                $apienv = !empty($apienv) ? $apienv->toArray() : array();
+                $envid = !empty($apienv['id']) ? $apienv['id'] : 0;
+
+                $info = ProjectToggle::insert([
+                    'uid'=>$uid, 
+                    'proid'=>$proid, 
+                    'envid'=>$envid, 
+                    'status'=>1]
+                );
             }
         }
         //清除所有缓存

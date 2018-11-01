@@ -73,21 +73,24 @@
 					})
 					var env,env_name;
 					env        = "{{$sys['Project']['env']['id']}}";
+					proid 	   = "{{$sys['Project']['proid'] or 0}}";
 					env_name   = "{{$sys['Project']['env']['envname']}}";
 					env_domain = "{{$sys['Project']['env']['domain']}}";
 					//初始化判断
-					if(parseInt(env)>0){
-						$(".current_env span").replaceWith("<span env='"+env+"' domain='"+env_domain+"'>"+env_name+"</span>");
-						$(".all_env li").each(function(){
-							if($(this).find('a').attr('env') == env){
-								$(this).hide();
-							}
-						})
-					}else{
-						var startEnv = $(".all_env li:first a span");
-						$(".current_env span").replaceWith($(".all_env li:first a").html());
-						$(".all_env li:first").hide();
-						envToggle(startEnv.attr('env'));
+					if(parseInt(proid)>0){
+						if(parseInt(env)>0){
+							$(".current_env span").replaceWith("<span env='"+env+"' domain='"+env_domain+"'>"+env_name+"</span>");
+							$(".all_env li").each(function(){
+								if($(this).find('a').attr('env') == env){
+									$(this).hide();
+								}
+							})
+						}else{
+							var startEnv = $(".all_env li:first a span");
+							$(".current_env span").replaceWith($(".all_env li:first a").html());
+							$(".all_env li:first").hide();
+							envToggle(startEnv.attr('env'));
+						}
 					}
 					//环境切换
 					$(".all_env li").click(function(){
