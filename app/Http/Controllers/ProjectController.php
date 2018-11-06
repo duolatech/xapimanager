@@ -129,8 +129,8 @@ class ProjectController extends Controller
         if(in_array($proid, $proids)){
             $uid = session::get('uid');
             $data = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->first();
+            ProjectToggle::where(array('uid'=>$uid))->update(['status'=>0]);
             if(!empty($data->id)){
-                ProjectToggle::where(array('uid'=>$uid))->update(['status'=>0]);
                 $info = ProjectToggle::where(array('uid'=>$uid, 'proid'=>$proid))->update(['status'=>1]);
             }else{
                 $apienv = ApiEnv::where(['proid'=>$proid,'status'=>1])->orderBy('id','asc')->first();
