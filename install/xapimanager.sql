@@ -376,6 +376,8 @@ CREATE TABLE `mx_project_toggle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL COMMENT '用户id',
   `proid` int(11) DEFAULT NULL COMMENT '当前激活的项目id',
+  `envid` tinyint(4) DEFAULT '0' COMMENT '当前环境id',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态：1当前项目，0非当前项目',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
