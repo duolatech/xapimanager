@@ -469,16 +469,18 @@ class ApiController extends Controller
                 $detail->save();
             }
             //发送审核通知
-            Message::sendMessage(
-                array(
-                    'sender'    => 1,
-                    'receiver'  => $detail->author,
-                    'pid'   => 0,
-                    'subject'   => 'Api 审核通知',
-                    'content'   => "Api:{$detail->gateway} 审核不通过，原因：".$audit->remark.'。请修改后提交',
-                    'sendtime'  => time(),
-                )    
-            );
+            if(!empty($detail->status) && $detail->status==5){
+                Message::sendMessage(
+                    array(
+                        'sender'    => 1,
+                        'receiver'  => $detail->author,
+                        'pid'   => 0,
+                        'subject'   => 'Api 审核通知',
+                        'content'   => "Api:{$detail->gateway} 审核不通过，原因：".$audit->remark.'。请修改后提交',
+                        'sendtime'  => time(),
+                    )    
+                );
+            }
             //返回操作状态
             if(!empty($auditStatus) && !empty($detail->id)){
                 return response()->json(['status'=>200, 'message'=>'操作成功', 'auditStatus'=>$status]);
