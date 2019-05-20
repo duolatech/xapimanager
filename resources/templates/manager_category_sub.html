@@ -1,0 +1,62 @@
+{{template "header.html" .}}
+<link href="/assets/js/plugins/footable/footable.core.css" rel="stylesheet">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="background-color:#FFFFFF">
+                    <h5><a href="/manager/{{.proid}}/category">分类列表 </a>/ ({{.classify.Classifyname}})子分类</h5>
+                    <div class="ibox-tools">
+                        <a href="/manager/{{.proid}}/category/infoSub?cateId={{.classify.Id}}" class="btn btn-primary btn-xs">创建子分类</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size=100>
+                        <thead>
+                        <tr >
+                            <th data-toggle="true">分类名称</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{$proid := .proid}}
+                        {{$auth := .auth}}
+                        {{range .subClassify}}
+                            <tr>
+                                <td>{{.Classifyname}}</td>
+                                <td>{{FormatTime .Addtime 1}}</td>
+                                <td>
+                                    <a href="/manager/{{$proid}}/category/detail?subcateId={{.Id}}" class="m-r-sm">介绍</a>
+                                    {{if $auth.modifyCategory}}
+                                        <a href="/manager/{{$proid}}/category/info?&subcateId={{.Id}}" class="m-r-sm">编辑</a>
+                                    {{end}}
+                                    {{if $auth.delCategory}}
+                                        <a href="javascript:;" class="m-r-sm delCategory" cateId="{{.Id}}" proid="{{$proid}}">删除</a>
+                                    {{end}}
+                                </td>
+                            </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/footable/footable.all.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/category.js"></script>
+<script>
+    $(function(){
+        $('.footable').footable();
+        $(".footable-sort-indicator").remove();
+    });
+</script>

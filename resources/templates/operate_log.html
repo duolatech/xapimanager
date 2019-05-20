@@ -1,0 +1,60 @@
+{{template "header.html" .}}
+<link rel="stylesheet" href="/assets/js/plugins/pagination/pagination.css" />
+<link href="/assets/js/plugins/footable/footable.core.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content">
+                    <div class="spiner-loading">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size=20>
+                        <thead>
+                        <tr >
+
+                            <th data-toggle="true">操作人</th>
+                            <th>操作对象</th>
+                            <th>类型</th>
+                            <th>时间</th>
+                            <label id="hideTh">
+
+                            </label>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center footable-visible">
+                                    <div class="M-box"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/footable/footable.all.min.js"></script>
+<script src="/assets/js/plugins/pagination/jquery.pagination.min.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/users.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script >
+    $(function () {
+        ajaxOperateLog({page:1},1);
+    })
+</script>

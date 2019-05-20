@@ -1,0 +1,42 @@
+{{template "header.html" .}}
+<link rel="stylesheet" href="/assets/js/plugins/pagination/pagination.css">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/assets/js/plugins/froala/css/froala_style.min.css" rel="stylesheet" type="text/css">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="pull-right">
+                            <a href="/help/info?hid={{.data.id}}" class="btn btn-white btn-xs" type="button">编辑</a>
+                            <a class="btn btn-white btn-xs delete" type="button" hid="{{.data.id}}">删除</a>
+                        </div>
+                        <div class="text-center article-title">
+                            <h1>
+                                {{.data.title}}
+                            </h1>
+                            <p>{{.data.author}}&nbsp;&nbsp;{{.data.ctime}}</p>
+                        </div>
+                        <div class="fr-view">
+                            {{.data.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/pagination/jquery.pagination.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/help.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+    })
+</script>

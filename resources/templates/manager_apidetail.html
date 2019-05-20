@@ -1,0 +1,355 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/assets/js/plugins/jsonview/jquery.jsonview.min.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <form id="myForm" method="post" class="form-horizontal">
+                        <div class="ibox-content p-xs">
+                            <div class="mail-tools tooltip-demo m-t-md">
+                                <div class="btn-group pull-right">
+                                    {{if eq .auth.modifyApi true}}<a href="/manager/{{.proid}}/Api/info?did={{.basic.Id}}" class="btn btn-white btn-sm" title="编辑"><i class="fa fa-paste"></i></a>{{end}}
+                                    {{if eq .auth.delApi true}}<a href="javascript:;" class="btn btn-white btn-sm deleteApi" title="删除" did="{{.basic.Id}}" proid="{{.proid}}"><i class="fa fa-trash-o"></i></a>{{end}}
+                                </div>
+                                <button class="btn btn-white btn-sm"><a href="/manager/{{.proid}}/Api/list"><i class="fa fa-mail-reply-all"></i> 返回列表</a></button>
+                                {{if and (eq .auth.publishApi true) (eq .basic.Status 1)}}<a  href="javascript:;" class="btn btn-info btn-sm publish" did="{{.basic.Id}}" proid="{{.proid}}" publishEnv="{{.basic.PublishEnv}}">发布</a>{{end}}
+                                <a href="/mock{{.basic.Gateway}}?did={{.basic.Id}}" class="btn btn-primary  btn-sm" target="_blank">mock</a>
+                                {{/*<button class="btn btn-success  btn-sm">调试</button>*/}}
+                            </div>
+                            <div class="hr-line-dashed m-xs"></div>
+                            <div class="mail-tools tooltip-demo m-t-md m-l-sm">
+                                <h3>{{.basic.Apiname}}</h3>
+                            </div>
+                            <div class="tabs-container">
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane active">
+                                            <div class="col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <strong>
+                                                                        gateway api：【{{.basic.Method}}】
+                                                                        <a href="{{.basic.Envinfo.Domain}}{{.basic.Gateway}}" target="_blank">
+                                                                            {{.basic.Envinfo.Domain}}{{.basic.Gateway}}
+                                                                        </a>
+                                                                    </strong>
+                                                                </td>
+                                                                <td>版本/状态：V{{.basic.Version}}<span class="text-green apiStatus" status="{{.basic.Status}}">（{{.basic.ApiStatus}}）</span></td>
+                                                                <td> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>local api：{{.basic.Local}}</strong></td>
+                                                                <td>更新时间：{{FormatTime .basic.Mtime 2}}</td>
+                                                                <td> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Api分类：{{.basic.ClassifyName}}</td>
+                                                                <td>创建于：{{FormatTime .basic.Ctime 2}}</td>
+                                                                <td> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>网络权限：{{.basic.Network}}</td>
+                                                                <td>开发人员：{{.basic.Author}}</td>
+                                                                <td> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>认证方式：{{.basic.Authentication}}</td>
+                                                                <td>维护人员: {{.basic.Editor}}</td>
+                                                                <td> </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                            <div class="m-l-md">
+                                                Api描述：{{.basic.Description}}
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="m-t-sm">
+
+                            <div class="tabs-container">
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="mail-tools tooltip-demo m-t-md">
+                                                <h3>header参数</h3>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>名称</th>
+                                                            <th>值</th>
+                                                            <th>描述</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {{range .Header.content}}
+                                                            <tr>
+                                                                <td>{{.name}}</td>
+                                                                <td>{{.value}}</td>
+                                                                <td>{{.desc}}</td>
+                                                            </tr>
+                                                        {{end}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="m-t-sm">
+                            <div class="tabs-container">
+                                <div class="tab-content">
+                                    <div id="tab-2" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="mail-tools tooltip-demo m-t-md">
+                                                <div class="btn-group pull-right">
+                                                    请求数据类型：{{.Request.data_type }}
+                                                    {{if eq .Request.data_type "JSON"}}
+                                                        ，JSON根类型：{{.Request.valueType}}
+                                                    {{end}}
+                                                </div>
+                                                <h3>请求参数</h3>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>字段名</th>
+                                                            <th>类型</th>
+                                                            <th>必填</th>
+                                                            <th>描述</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {{if eq .Request.data_type "RAW"}}
+                                                            <tr>
+                                                                <td colspan="5">
+                                                                    <textarea  name="request-table-RAW" class="form-control request-table-RAW" rows="5">{{.Request.Raw}}</textarea>
+                                                                </td>
+                                                            </tr>
+                                                        {{else}}
+                                                            {{range .Request.content}}
+                                                                <tr>
+                                                                    <td style="padding-left: {{.other.dataLeft}}px;">{{.name}}</td>
+                                                                    <td>{{.valueType}}</td>
+                                                                    <td>{{if eq .valueMust "1"}} 必填 {{else}} 可选 {{end}}</td>
+                                                                    <td>{{.desc}}</td>
+                                                                    <td>{{.default}}</td>
+                                                                </tr>
+                                                            {{end}}
+                                                        {{end}}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="m-t-sm">
+                            <div class="tabs-container">
+                                <div class="tab-content">
+                                    <div id="tab-3" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="mail-tools tooltip-demo m-t-md">
+                                                <div class="btn-group pull-right">
+                                                    响应数据类型：{{.Response.data_type }}
+                                                    {{if eq .Response.data_type "JSON"}}
+                                                        ，JSON根类型：{{.Response.valueType}}
+                                                    {{end}}
+                                                </div>
+                                                <h3>响应数据</h3>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="col-sm-12">
+                                                <div class="m-xs">mock测试时将根据以下数据自动生成响应数据</div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>字段名</th>
+                                                            <th>类型</th>
+                                                            <th>必填</th>
+                                                            <th>描述</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {{range .Response.content}}
+                                                            <tr>
+                                                                <td style="padding-left: {{.other.dataLeft}}px;">{{.name}}</td>
+                                                                <td>{{.valueType}}</td>
+                                                                <td>{{if eq .valueMust "1"}} 必填 {{else}} 可选 {{end}}</td>
+                                                                <td>{{.desc}}</td>
+                                                                <td>@mock={{.default}}</td>
+                                                            </tr>
+                                                        {{end}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-t-sm">
+                            <div class="tabs-container">
+                                <div class="tab-content">
+                                    <div id="tab-4" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="mail-tools tooltip-demo m-t-md">
+                                                <h3>所有状态码</h3>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="col-sm-8">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>状态码</th>
+                                                            <th>描述</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {{range .Statuscode.content}}
+                                                            <tr class="gradeX footable-even" style="display: table-row;">
+                                                                <td>{{.name}}</td>
+                                                                <td>{{.desc}}</td>
+                                                            </tr>
+                                                        {{end}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-t-sm">
+                            <div class="tabs-container">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#tab-5" aria-expanded="true"> 成功示例</a>
+                                    </li>
+                                    <li class=""><a data-toggle="tab" href="#tab-6" aria-expanded="false">失败示例</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab-5" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="col-sm-12">
+                                                <span>响应数据类型：{{.SuccessGoback.data_type}}</span>
+                                                <div class="m-t-sm">
+                                                    <div class="goback" data-type="{{.SuccessGoback.data_type}}">{{.SuccessGoback.content}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-6" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="col-sm-12">
+                                                <span>响应数据类型：{{.FailGoback.data_type}}</span>
+                                                <div class="m-t-sm FailGoback">
+                                                    <div class="goback" data-type="{{.FailGoback.data_type}}">{{.FailGoback.content}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <small class="font-bold">
+                <div class="ibox-content">
+                    <form id="envFrom" type="post" class="form-horizontal">
+                        <div class="col-sm-12">
+                            <textarea  name="leadingData" rows=5 class="form-control" required="" aria-required="true"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8 m-t-md">
+                                <input type="hidden" name="loadingType" value="">
+                                <input type="hidden" name="operateTable" value="">
+                                <button type="button" class="btn btn-w-m btn-info btn-leadingData" >提 交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </small></div>
+        <small class="font-bold">
+        </small></div>
+    <small class="font-bold">
+    </small>
+</div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/jsonview/jquery.jsonview.min.js"></script>
+<script src="/assets/js/plugins/vkBeautify/vkbeautify.js"></script>
+<script src="/assets/js/format/jsonp.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/apidetail.js"></script>
+<script >
+    $(function () {
+
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        //Api 状态检查
+        var apiStatus = $(".apiStatus").attr("status");
+        if (apiStatus == "5") {
+            swal("审核不通过,请按照要求编辑后保存", "{{.basic.AuditInfo.Remark}}","error")
+            swal({
+                title: "审核不通过",
+                text: "原因：{{.basic.AuditInfo.Remark}}<br/>请按要求修改您的Api",
+                type: "error",
+                html: true
+            })
+        }
+
+    })
+</script>

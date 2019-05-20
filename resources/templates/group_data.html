@@ -1,0 +1,136 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        <h3><a href="/group">权限管理 </a> / 数据权限 </h3>
+                        <div class="dd m-t-md" id="nestable">
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="1">
+                                    <div class="dd-handle project">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-th-large text-info"></i>
+                                                项目选择
+                                            <i class="fa fa-angle-right pull-right" style="font-size: 20px;"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="dd-item" data-id="2">
+                                    <div class="dd-handle classify">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-tasks text-muted"></i>
+                                                接口分类
+                                            <i class="fa fa-angle-right pull-right" style="font-size: 20px;"></i>
+                                        </a>
+                                    </div>
+                                </li>
+
+                            </ol>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 animated fadeInRight">
+            <div class="mail-box-header padder-v">
+                <h3 class="dataTitle">
+                    项目选择
+                </h3>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <button class="btn btn-sm btn-info space-15 btn-submit-dataAuth" type="submit" element="xProject" gid="{{.gid}}">保 存</button>
+                        <label class="m-l-md">当前权限组：{{.group.Groupname}}</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mail-box xProject">
+                <table class="table table-hover table-mail">
+                    <tbody>
+                    {{$proids := .proids}}
+                    {{range .project}}
+                    <tr class="read">
+                        <td class="check-mail">
+                            <div class="i-checks icheckbox_square-green">
+                                {{$have := inArray .Id $proids}}
+                                <input name="projectAuth" type="checkbox" class="i-checks" value="{{.Id}}" {{if eq .Attribute 1}} checked  onclick="return false;" {{end}} {{if eq $have true}} checked {{end}}>
+                                <ins class="iCheck-helper"></ins></div>
+                        </td>
+                        <td class="mail-ontact">{{.Proname}}</td>
+                        <td class="mail-subject">{{.Desc}}</td>
+                        <td class="mail-subject">{{if eq .Attribute 1}}（公有项目无需设置）{{end}}</td>
+                    </tr>
+                    {{end}}
+                    </tbody>
+                </table>
+            </div>
+            {{$classifyIds := .classifyIds}}
+            {{range .project}}
+            <div class="mail-box xClassify" style="display: none;">
+                <div class="ibox-content">
+                    <div class=""><h3>{{.Proname}}</h3></div>
+                    <div class="dd" id="nestable">
+                        <ol class="dd-list">
+                            {{range .Classify}}
+                            <li class="dd-item father" data-id="1">
+                                <div class="dd-handle">
+                                    {{$have := inArray .XClassify.Id $classifyIds}}
+                                    <input name="classifyAuth" type="checkbox" class="i-checks oneCheck" value="{{.XClassify.Id}}" {{if eq $have true}} checked {{end}}>
+                                    <label class="mail-ontact">{{.XClassify.Classifyname}}</label>
+                                </div>
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="2">
+                                        <div class="dd-handle">
+                                            {{range .Child}}
+                                                {{$have := inArray .XClassify.Id $classifyIds}}
+                                                <input name="classifyAuth" type="checkbox" class="i-checks fourCheck" value="{{.XClassify.Id}}" {{if eq $have true}} checked {{end}}>
+                                                <label class="m-r-md">{{.XClassify.Classifyname}}</label>
+                                            {{end}}
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+                            {{end}}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            {{end}}
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/nestable/jquery.nestable.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/group.js"></script>
+<script >
+    $(function () {
+        //项目选择
+        obj = $(".dataTitle");
+        $(".project").on("click", function(){
+            obj.text("项目选择");
+            $(".xProject").show();
+            $(".xClassify").hide();
+            $(".btn-submit-dataAuth").attr("element", "xProject");
+        });
+        //接口分类选择
+        $(".classify").on("click", function(){
+            obj.text("接口分类选择(说明：全选和全不选默认等效)");
+            $(".xProject").hide();
+            $(".xClassify").show();
+            $(".btn-submit-dataAuth").attr("element", "xClassify");
+        });
+    })
+</script>

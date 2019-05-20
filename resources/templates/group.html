@@ -1,0 +1,68 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content m-b-sm border-bottom">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="pull-left  m-r-md">
+                                    <i class="fa fa-globe text-navy mid-icon"></i>
+                                </div>
+                                <h2>新增权限组</h2>
+                                <span>你可以根据团队的需要自由新增权限组</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="/group/info">
+                                <button class="btn btn-info  dim btn-outline m-t-lg" type="button">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content forum-container">
+
+                        <div class="forum-title">
+                            <h3>权限组</h3>
+                        </div>
+                        <div class="project-list">
+                            <table class="table table-hover">
+                                <tbody>
+                                {{range .group}}
+                                    <tr>
+                                        <td>
+                                            <h4>{{.Groupname}} {{if eq .Status 2}}(已禁用){{end}}</h4>
+                                            <small>{{.Description}}</small>
+                                        </td>
+                                        <td>
+                                            <a href="/group/featureAuth/{{.Id}}"><span class="label label-primary">功能权限</span></a>
+                                        </td>
+                                        <td>
+                                            <a href="/group/info?gid={{.Id}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 修改 </a>
+                                            {{if gt .Id 1}}
+                                            <a href="javascript:;" class="btn btn-white btn-sm groupDelete" gid="{{.Id}}"><i class="fa fa-close"></i> 删除 </a>
+                                            {{end}}
+                                        </td>
+                                    </tr>
+                                {{end}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/group.js"></script>

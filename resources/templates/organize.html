@@ -1,0 +1,103 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+
+                    <div class="ibox-content m-b-sm border-bottom">
+
+                        <div class="forum-item">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="pull-left  m-r-md">
+                                        <i class="fa fa-globe text-navy mid-icon"></i>
+                                    </div>
+                                    <h2>寻找团队</h2>
+                                    <span>加入团队后才能查看、编辑该团队下的项目</span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group m-t-md osearch">
+                                        <input type="text" placeholder="根据OrganizeNo，查找您的团队" class="input form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn btn-primary" identify = {{.organizeId}}> <i class="fa fa-search"></i> 搜索</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <search id="seachresult">
+
+                    </search>
+                    <div class="ibox-content forum-container">
+
+                        <div class="forum-title">
+                            <h3>我的团队(OrganizeNo：{{.OrganizeNo}})</h3>
+                        </div>
+                        {{range .data.self}}
+                            <div class="forum-item">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="forum-icon">
+                                            <i class="fa fa-odnoklassniki"></i>
+                                        </div>
+                                        <a href="forum_post.html" class="forum-item-title">{{.Name}}</a>
+                                        <div class="forum-sub-title">口号：{{.Desc}}</div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn btn-primary organize_modify" oid="{{.Organize}}">
+                                                    <i class="fa fa-wrench"></i> 编辑
+                                                </button>
+                                                <button type="button" class="btn btn btn-info m-r-sm invite" oid="{{.Organize}}" invite="{{.Invite}}">
+                                                    <i class="fa fa-link"></i> 邀请团队成员加入
+                                                </button>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {{end}}
+                        <div class="forum-title">
+                            <h3>我加入的团队</h3>
+                        </div>
+                        {{range .data.everyone}}
+                            <div class="forum-item">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="forum-icon">
+                                            <i class="fa fa-paw"></i>
+                                        </div>
+                                        <a href="forum_post.html" class="forum-item-title">{{.Name}} </a>
+                                        <div class="forum-sub-title">口号：{{.Desc}}</div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn btn-info invite" oid="{{.Organize}}" invite="{{.Invite}}">
+                                                    <i class="fa fa-link"></i> 邀请团队成员加入
+                                                </button>
+                                                <button type="button" class="btn btn btn-default orgquit" oid="{{.Organize}}">
+                                                    <i class="fa fa-sign-out"></i> 退出
+                                                </button>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/organize.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>

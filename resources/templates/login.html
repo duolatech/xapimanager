@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>{{ .website.sitename }}</title>
+    <meta name="keywords" content="{{.website.keywords}}">
+    <meta name="description" content="{{.website.description}}">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/login.css" rel="stylesheet">
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+<body class="signin">
+    <div class="signinpanel">
+        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-6"></div>
+            <div class="col-sm-4">
+                <div class="navbar-brand block m" style="font-size:26px;">{{ .website.title }}</div>
+                    <form name="form" id="loginForm" method="post">
+                            <input type="text" name="user" class="form-control valid" placeholder="用户名/手机号/邮箱" aria-required="true" aria-invalid="false">
+                            <span class="help-block m-b-none text-danger"></span>
+                            <input type="password" name="pass" class="form-control valid" placeholder="密码" aria-required="true" aria-invalid="false">
+                            <span class="help-block m-b-none text-danger"></span>
+                            <div class="m-t-xs">
+                                <button type="submit" class="btn btn-w-m btn-info login-submit">登 录</button>
+                                <a href="/register" class="btn btn-primary">注 册</a>
+                            </div>
+                    </form>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/md5.min.js"></script>
+<script src="/assets/js/login.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?821b76173f83e2686aebf84e800b828e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</html>

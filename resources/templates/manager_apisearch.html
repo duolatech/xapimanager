@@ -1,0 +1,104 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content forum-container">
+                        <div class="forum-title">
+                            <h3>Api 搜索</h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="myForm" method="post" class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Api 名称</label>
+
+                                                <div class="col-sm-10">
+                                                    <input name="apiname" type="text" class="form-control" value="">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Api 分类</label>
+                                                <div class="col-sm-10">
+                                                    <div class="row selectList">
+                                                        <div class="col-sm-6">
+                                                            <select name="classify" class="form-control m-b-xs classify">
+                                                                <option value="0">请选择</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <select name="subClassify" class="form-control m-b-xs subClassify">
+                                                                <option value="0" selected="">请选择</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">URI</label>
+                                                <div class="col-sm-10">
+                                                    <input name="gateway" type="text" class="form-control" value="" placeholder="URL路径部分，示例：/Api/v1/info">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Api 开发人</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="author" class="form-control ui-select-search">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="hr-line-dashed"></div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-2">
+                                                    <input type="hidden" name="areaJsonstr" value="{{.classify}}">
+                                                    <button class="btn btn-primary btn-Api-search" type="button" proid="{{.proid}}">搜 索</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/apisearch.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        var envid = {{.env.Envid}}
+        if(envid==0){
+            swal({
+                    title: "请在顶部右上角处选择当前环境",
+                    text: "环境选择后才能查找到Api",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "好的",
+                    cancelButtonText: "稍后",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                });
+        }
+    });
+</script>

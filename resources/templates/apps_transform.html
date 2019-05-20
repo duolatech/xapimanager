@@ -1,0 +1,42 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="mail-tools tooltip-demo m-sm m-l-none">
+                        <div class="btn-group pull-right">
+                            <a href="/apps/json">json格式化、压缩</a>
+                        </div>
+                        <button class="btn btn-white btn-sm"><a href="/apps"><i class="fa fa-mail-reply-all"></i> 返回应用列表</a></button>
+                    </div>
+                    <div class="hr-line-dashed m-xs"></div>
+                    <h2><strong>JSON/XML互转、JSON转XML、XML转JSON</strong></h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4>输入数据(JSON或XML)：<a href="javscript:;" class="jsonExample">JSON样例</a>、<a href="javscript:;" class="xmlExample">XML样例</a></h4>
+                            <textarea id="import" name="import" class="form-control"  style="height: 460px;background-color: #528B8B;color: #ffffff"></textarea>
+                            <div class="m-t-sm">
+                                <button type="button" class="btn btn-w-m btn-info xmltrans">XML转JSON</button>
+                                <button type="button" class="btn btn-w-m btn-info jsontrans">JSON转XML</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>输出数据：</h4>
+                            <textarea id="export" name="export" class="form-control"  style="height: 460px;background-color: #528B8B;color: #ffffff"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/assets/js/plugins/ObjTree/lib/XML/ObjTree.js"></script>
+<script src="/assets/js/format/json.js"></script>
+<script src="/assets/js/plugins/vkBeautify/vkbeautify.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/apps.js"></script>

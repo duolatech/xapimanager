@@ -1,0 +1,54 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            {{$oid := .organize}}
+            {{range .project}}
+            <div class="col-sm-3 m-b-sm" style="height:195px;">
+                <div class="widget-head-color-box navy-bg p-xxs">
+
+                </div>
+                <div class="widget-text-box">
+                    <div class="text-center p-xxs">
+                        <h2 class="font-bold no-margins">
+                            <label proid="{{.Id}}" class="project" style="cursor:pointer;">{{.Proname}}</label>
+                        </h2>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <p class="">{{.Desc}}</p>
+                    <div class="text-right">
+                        {{if eq .Organize $oid}}
+                            <a href="/project/info/{{.Id}}" class="btn btn-xs btn-primary"> 项目设置</a>
+                            <a href="/project/env/{{.Id}}" class="btn btn-xs btn-info"> 环境设置</a>
+                            {{else}}
+
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+            {{end}}
+            <div class="col-sm-3 m-b-sm">
+                <div class="widget-head-color-box navy-bg p-xxs"></div>
+                <div class="widget-text-box  text-center p-xl">
+                    <a href="/project/create">
+                        <div class="icon">
+                            <i class="img-responsive fa fa-plus" style="font-size: 90px;color: #dadada;"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script type="text/javascript">
+    $(function(){
+        //父级页面跳转
+        $(".project").on("click", function(){
+            proid = $(this).attr("proid")
+            window.parent.location.href='/manager/'+ proid;
+        });
+    });
+</script>

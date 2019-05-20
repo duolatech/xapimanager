@@ -1,0 +1,95 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content forum-container">
+                        <div class="forum-title">
+                            <h3>添加密钥</h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="myForm" method="post" class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">企业名称</label>
+
+                                                <div class="col-sm-10">
+                                                    <input name="company" type="text" class="form-control" value="{{.company.Company}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">AppId</label>
+                                                <div class="col-sm-10">
+                                                    <input name="appId" type="text" class="form-control" value="{{.company.Appid}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">AppSecret</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="appSecret" class="form-control ui-select-search" value="{{.company.Appsecret}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">状态</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="status" value="1" {{if or (eq .company.Status 1) (eq .company.Status 0)}} checked {{end}}> 开启
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="status" value="2" {{if eq .company.Status 2}} checked {{end}}> 关闭
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6 col-sm-offset-2">
+                                                    <input type="hidden" name="comid" value="{{.company.Id}}">
+                                                    <button class="btn btn-primary btn-info-submit" type="submit" url="/manager/{{.proid}}/company/store">保 存</button>
+                                                    <button class="btn btn-info random-button" type="button">随机生成AppId/AppSecret</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/company.js"></script>
+<script >
+    $(function () {
+
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+    })
+</script>

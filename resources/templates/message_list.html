@@ -1,0 +1,66 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/js/plugins/pagination/pagination.css">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12 animated fadeInRight">
+                <div class="mail-box-header">
+                    <form method="get" action="index.html" class="pull-right mail-search">
+                        <div class="input-group">
+                            <a class="btn btn-white btn-sm m-r-xs refresh"  title="刷新消息列表">
+                                <i class="fa fa-refresh"></i> 刷新</a>
+                            <a class="btn btn-white btn-sm m-r-xs read"  title="标为已读">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a class="btn btn-white btn-sm delete" title="删除">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
+                    </form>
+                    <h2>
+                        消息通知(<span class="totalCount">0</span>)
+                    </h2>
+                </div>
+                <div class="mail-box">
+                    <div class="spiner-loading">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+                    <table class="table table-hover table-mail tab-content">
+                        <tbody></tbody>
+                        <tfoot class="hide-if-no-paging">
+                        <tr>
+                            <td colspan="5" class="text-center footable-visible">
+                                <div class="M-box"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/pagination/jquery.pagination.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/message.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        ajaxMessageList({page:1}, 1);
+
+
+
+    })
+</script>

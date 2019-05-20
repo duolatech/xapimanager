@@ -1,0 +1,103 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body id="wrapper-app" class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    {{template "left_side_api.html" .}}
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2" href="#"><i class="fa fa-align-justify"></i> </a>
+                    <a class="dropdown-toggle minimalize-styl-2" href="/main"><i class="fa fa-undo"></i> 返回项目列表 </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle ng-binding current_env" data-toggle="dropdown" href="#" style="display:inline;">
+                            {{range $k, $v:= .currentEnv}}
+                                <span envid="{{$k}}">{{$v}}</span>
+                            {{end}}
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-alerts all_env">
+                            {{$proid := .proid}}
+                            {{range .projectEnv}}
+                            <li>
+                                <a href="javascript:;" proid="{{$proid}}" envid="{{.Id}}">
+                                    {{.Envname}}
+                                </a>
+                            </li>
+                            {{end}}
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info J_menuItem" href="/message/list">
+                            <i class="fa fa-bell"></i>
+                            <span class="label label-primary unreadMessage" style="display: none"></span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="#" style="display:inline;">
+                            <img alt="image" class="img-circle" src="{{.userinfo.avatar}}" title="{{.userinfo.username}}" style="width: 25px;" >
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="/users/person" class="J_menuItem">
+                                    <div>
+                                        个人信息
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:;" class="clearCache">
+                                    <div>
+                                        清除缓存
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="userlogout">
+                                    <div>
+                                        退出
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe id="J_iframe" width="100%" height="100%" src="/manager/{{$proid}}/Api/list" frameborder="0"  seamless scrolling="auto"></iframe>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
+
+<!-- 全局js -->
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- 自定义js -->
+<script src="/assets/js/common.js?v=4.1.0"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript">
+    function changeFrameHeight(){
+        var ifm= document.getElementById("J_iframe");
+        ifm.height=document.documentElement.clientHeight-56;
+    }
+    window.onresize=function(){ changeFrameHeight();}
+    $(function(){changeFrameHeight();});
+
+</script>
+
+</body>
+
+</html>

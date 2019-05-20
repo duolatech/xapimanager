@@ -1,0 +1,101 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/assets/css/select.min.css" rel="stylesheet">
+<link href="/assets/js/plugins/froala/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/js/plugins/froala/css/froala_style.min.css" rel="stylesheet" type="text/css">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content forum-container">
+                        <div class="forum-title">
+                            <h3><a href="{{.cateListUrl}}">分类列表 </a>/ {{if gt .classify.Id 0}} 编辑分类 {{else}}添加分类{{end}}</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="categoryForm" method="post" class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">分类名称</label>
+
+                                                <div class="col-sm-10">
+                                                    <input name="classify" type="text" class="form-control" value="{{.classify.Classifyname}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">分类描述</label>
+                                                <div class="col-sm-10">
+                                                    <textarea id="categorycontent" name="content">{{.desc}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-2">
+                                                    <input type="hidden" name="cateId" value="{{.classify.Id}}">
+                                                    <input type="hidden" name="proid" value="{{.proid}}">
+                                                    <button class="btn btn-primary btn-info-submit" type="submit">保 存</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/plugins/froala/js/froala_editor.pkgd.min.js"></script>
+<script src="/assets/js/plugins/froala/js/languages/zh_cn.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/category.js"></script>
+<script >
+    $(function (){
+        //大屏幕
+        var toolbarButtonsMD = ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'color', 'align', 'formatUL', 'outdent', 'indent', 'quote', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo'];
+        //小屏幕
+        var toolbarButtonsSM = ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo'];
+        //手机
+        var toolbarButtonsXS = ['bold', 'italic', 'fontFamily', 'fontSize', 'undo', 'redo'];
+        //编辑器初始化并赋值
+        $('#categorycontent').froalaEditor({
+            placeholderText: '请输入内容',
+            charCounterCount       : true,//默认
+            // charCounterMax         : -1,//默认
+            saveInterval            : 0,//不自动保存，默认10000
+            //theme                    : "red",
+            height                   : "300px",
+            toolbarBottom           : false,//默认
+            toolbarButtons          : toolbarButtonsMD,
+            toolbarButtonsMD        : toolbarButtonsMD,
+            toolbarButtonsSM        : toolbarButtonsSM,
+            toolbarButtonsXS        : toolbarButtonsXS,
+            toolbarInline           : false,//true选中设置样式,默认false
+            imageUploadMethod       : 'POST',
+            heightMin: 300,
+            charCounterCount        : true,//默认
+            charCounterMax: -1,     //最大字数限制，-1为不限制
+            osave: true,
+            autosaveInterval: 2500,
+            saveURL: 'hander/FroalaHandler.ashx',
+            spellcheck: false,
+            imageUploadURL: '/uploads/image',//上传到本地服务器
+            //imageUploadParams: {pid: '1'},
+            enter: $.FroalaEditor.ENTER_BR,
+            language: 'zh_cn'
+
+        });
+    })
+</script>

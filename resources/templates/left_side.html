@@ -1,0 +1,51 @@
+{{define "left_side.html"}}
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs" style="font-size:20px;">
+                                    <strong class="font-bold">{{ .website.title }}</strong>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                </li>
+                {{range $index, $elem := .menu}}
+                    {{if gt $index 0}}
+                    <li class="line dk"></li>
+                    {{end}}
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span class="ng-scope">{{.QyAuthRule.Title}}</span>
+                    </li>
+                    {{range .Child}}
+                        {{$le:= len .Child}}
+
+                        <li>
+                            <a class="J_menuItem" href="{{.QyAuthRule.Path}}">
+                                <i class="{{.QyAuthRule.Icon}}"></i>
+                                <span class="nav-label">{{.QyAuthRule.Title}}</span>
+                                {{if gt $le 0}}
+                                    <span class="fa arrow"></span>
+                                {{end}}
+                            </a>
+                            {{if gt $le 0}}
+                                <ul class="nav nav-second-level">
+                                    {{range .Child}}
+                                        <li>
+                                            <a class="J_menuItem" href="{{.QyAuthRule.Path}}">{{.QyAuthRule.Title}}</a>
+                                        </li>
+                                    {{end}}
+                                </ul>
+                            {{end}}
+                        </li>
+                    {{end}}
+                {{end}}
+            </ul>
+        </div>
+    </nav>
+{{end}}

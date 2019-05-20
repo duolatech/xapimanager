@@ -1,0 +1,487 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <form id="myForm" method="post" class="form-horizontal">
+                        <div class="ibox-title">
+                            <h5>
+                                <a href="/manager/{{.proid}}/Api/list">Api 列表 /</a>
+                                {{if gt .detail.Id 0}} 编辑Api {{else}} 添加Api {{end}}
+                            </h5>
+                            <div class="ibox-tools">
+
+                                <button class="btn btn-primary btn-sm btn-info-submit" type="submit" proid="{{.proid}}" did="{{.detail.Id}}" lid="{{.vInfo.lid}}">保 存</button>
+                            </div>
+                        </div>
+                    <div class="ibox-content p-xs">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content p-xs" style="border: none;">
+
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">Api 名称</label>
+
+                                                <div class="col-sm-10">
+                                                    <input name="apiname" type="text" class="form-control" {{ if eq .vInfo.status 1}} value="{{.vInfo.apiname}}" readonly {{end}}>
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">Api 分类</label>
+                                                <div class="col-sm-10">
+                                                    <div class="row selectList">
+                                                        <div class="col-sm-6">
+                                                            <select name="classify" class="form-control m-b-xs classify" clsid="{{.subClassify.Pid}}" {{ if eq .vInfo.status 1}} disabled {{end}}>
+                                                                <option value="0">请选择</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <select name="subClassify" class="form-control m-b-xs subClassify" subclsid="{{.subClassify.Id}}" {{ if eq .vInfo.status 1}} disabled {{end}} >
+                                                                <option value="0" selected="">请选择</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">Api 版本</label>
+                                                <div class="col-sm-10">
+                                                    <select name="version" class="form-control m-b-xs">
+                                                        <option value="1" {{if eq .detail.Version 1}} selected {{end}}>V1</option>
+                                                        <option value="2" {{if eq .detail.Version 2}} selected {{end}}>V2</option>
+                                                        <option value="3" {{if eq .detail.Version 3}} selected {{end}}>V3</option>
+                                                        <option value="4" {{if eq .detail.Version 4}} selected {{end}}>V4</option>
+                                                        <option value="5" {{if eq .detail.Version 5}} selected {{end}}>V5</option>
+                                                        <option value="6" {{if eq .detail.Version 6}} selected {{end}}>V6</option>
+                                                        <option value="7" {{if eq .detail.Version 7}} selected {{end}}>V7</option>
+                                                        <option value="8" {{if eq .detail.Version 8}} selected {{end}}>V8</option>
+                                                        <option value="9" {{if eq .detail.Version 9}} selected {{end}}>V9</option>
+                                                        <option value="10" {{if eq .detail.Version 10}} selected {{end}}>V10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">gateway api</label>
+                                                <div class="col-sm-2">
+                                                    <select name="method" class="form-control m-b-xs">
+                                                        <option value="1" {{if eq .detail.Method 1}} selected {{end}}>GET</option>
+                                                        <option value="2" {{if eq .detail.Method 2}} selected {{end}}>POST</option>
+                                                        <option value="3" {{if eq .detail.Method 3}} selected {{end}}>PUT</option>
+                                                        <option value="4" {{if eq .detail.Method 4}} selected {{end}}>DELETE</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <input name="gateway" type="text" class="form-control" value="{{.detail.Gateway}}" placeholder="URL路径部分，示例：/Api/v1/info">
+                                                    <span class="help-block m-b-none">备注：Url的前缀部分由当前环境的域名自动生成</span>
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">local api</label>
+                                                <div class="col-sm-10">
+                                                    <input name="local" type="text" class="form-control" value="{{.detail.Local}}" placeholder="本地完整Url，含http/https">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                        <div class="hr-line-dashed m-xs"></div>
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">网络权限</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="network" value="2" {{if or (eq .detail.Network 2) (eq .detail.Network 0)}} checked {{end}}> 外网
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="network"  value="1" {{if eq .detail.Network 1}} checked {{end}}> 内网
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed m-xs"></div>
+                                            <div class="form-group m-n">
+                                                <label class="col-sm-2 control-label">认证方式</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="authentication" value="1" {{if or (eq .detail.Authentication 1) (eq .detail.Authentication 0)}} checked {{end}}> session认证
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="authentication" value="2" {{if eq .detail.Authentication 2}} checked {{end}}> key/secret认证
+                                                    </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content p-xs" style="border: none;">
+                                        <div class="form-group m-n">
+                                            <div class="col-sm-12">
+                                                <textarea  name="description" class="form-control description" rows="15" placeholder="Api 描述">{{.detail.Description}}</textarea>
+                                                <span class="help-block m-b-none text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                        <div class="m-t-sm">
+                            <div class="tabs-container">
+                                <ul class="nav nav-tabs">
+                                    <li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false"> header参数</a>
+                                    </li>
+                                    <li class="active"><a data-toggle="tab" href="#tab-2" aria-expanded="true">请求参数</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="col-sm-10">
+                                            <table class="footable table table-stripped footable-loaded header-table">
+                                                <thead>
+                                                    <th>名称</th>
+                                                    <th>值</th>
+                                                    <th>描述</th>
+                                                    <th>操作</th>
+                                                </thead>
+                                                <tbody >
+                                                <tr class="gradeX footable-even" style="display: table-row;">
+                                                    <td><input type="text" name="name" class="form-control input-sm fieldname" placeholder="Content-Type"> </td>
+                                                    <td><input type="text" name="value" class="form-control input-sm value" placeholder="application/x-www-form-urlencoded"></td>
+                                                    <td><input type="text" name="desc" class="form-control input-sm desc" placeholder="字段说明"></td>
+                                                    <td class="center delete"><a><i class="fa fa-trash-o m-l-xs" style="font-size: 16px;"></i></a></td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td>
+                                                        <a class="btn btn-default btn-sm btn-rounded addHeader" href="javascript:;"><i class="fa fa-plus"></i> Add Header</a>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-2" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="col-sm-8">
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="radio" name="request_data_type" value="FORM" checked> FORM
+                                                </label>
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="radio" name="request_data_type"  value="JSON"> JSON
+                                                </label>
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="radio" name="request_data_type"  value="XML"> XML
+                                                </label>
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="radio" name="request_data_type"  value="RAW"> RAW
+                                                </label>
+                                                <label class="btn_request_data_type request_data_type_JSON" style="display: none">
+                                                    JSON根类型
+                                                    <select name="request-valueType" class="valueType">
+                                                        <option value="object" selected>object</option>
+                                                        <option value="array">array</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <table class="footable table table-stripped footable-loaded request-table">
+                                                    <thead>
+                                                    <th>字段名</th>
+                                                    <th>类型</th>
+                                                    <th>必填</th>
+                                                    <th>描述</th>
+                                                    <th>备注</th>
+                                                    <th>操作</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="gradeX footable-even" style="display: table-row;" data-id="1-0" data-padding-left="0"  data-subnodenum="0">
+                                                        <td style="padding-left: 0px;">
+                                                            <input type="text" name="name" class="form-control input-sm fieldname" placeholder="字段名">
+                                                        </td>
+                                                        <td>
+                                                            <select name="valueType" class="form-control valueType">
+                                                                <option value="string" >string</option>
+                                                                <option value="number" >number</option>
+                                                                <option value="object" >object</option>
+                                                                <option value="array" >array</option>
+                                                                <option value="boolean" >boolean</option>
+                                                                <option value="null" >null</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="valueMust" class="form-control valueMust">
+                                                                <option value="1" selected>是</option>
+                                                                <option value="2" >否</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="desc" class="form-control input-sm desc" placeholder="字段说明"> </td>
+                                                        <td><input type="text" name="default" class="form-control input-sm default" placeholder="123"> </td>
+                                                        <td class="center">
+                                                            <a class="btn btn-default btn-xs btn-rounded sibling" href="javascript:;" style="padding: 3px 6px;">
+                                                                <i class="fa fa-plus"></i>
+                                                                同级</a>
+                                                            <a class="btn btn-default btn-xs btn-rounded child" href="javascript:;" style="padding: 3px 6px;">
+                                                                <i class="fa fa-plus"></i>
+                                                                子级</a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="btn btn-default btn-sm btn-rounded addsibling" href="javascript:;">添加字段</a>
+                                                            <a class="btn btn-default btn-sm btn-rounded btn_request_data_type request_data_type_JSON" href="javascript:;" data-toggle="modal" data-target="#myModal" loadingType="Json" operateTable="request-table" style="display: none"> 导入JSON</a>
+                                                            <a class="btn btn-default btn-sm btn-rounded btn_request_data_type request_data_type_XML" href="javascript:;" data-toggle="modal" data-target="#myModal" loadingType="Xml" operateTable="request-table"  style="display: none"> 导入XML</a>
+                                                        </td>
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <div class="col-sm-12 m-t">
+                                                    <textarea  name="request-table-RAW" class="form-control request-table-RAW" rows="5" style="display: none"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="m-t-sm">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab-3" aria-expanded="true"> 响应数据</a>
+                                        </li>
+                                        <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">所有状态码</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-3" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="col-sm-8">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="response_data_type"  value="JSON" checked> JSON
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="response_data_type"  value="XML"> XML
+                                                    </label>
+                                                    <label class="btn_response_data_type response_data_type_JSON">
+                                                        JSON根类型
+                                                        <select name="responese-valueType" class="valueType">
+                                                            <option value="object" >object</option>
+                                                            <option value="array" >array</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <table class="footable table table-stripped footable-loaded response-table">
+                                                        <thead>
+                                                        <th>字段名</th>
+                                                        <th>类型</th>
+                                                        <th>必填</th>
+                                                        <th>描述</th>
+                                                        <th>备注</th>
+                                                        <th>操作</th>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr class="gradeX footable-even" style="display: table-row;" data-id="1-0" data-padding-left="0"  data-subnodenum="0">
+                                                            <td style="padding-left: 0px;">
+                                                                <input type="text" name="name" class="form-control input-sm fieldname" placeholder="字段名">
+                                                            </td>
+                                                            <td>
+                                                                <select name="valueType" class="form-control valueType">
+                                                                    <option value="string" >string</option>
+                                                                    <option value="number" >number</option>
+                                                                    <option value="object" >object</option>
+                                                                    <option value="array" >array</option>
+                                                                    <option value="boolean" >boolean</option>
+                                                                    <option value="null" >null</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select name="valueMust" class="form-control valueMust">
+                                                                    <option value="1" selected>是</option>
+                                                                    <option value="2" >否</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><input type="text" name="desc" class="form-control input-sm desc" placeholder="字段说明"> </td>
+                                                            <td><input type="text" name="default" class="form-control input-sm default" placeholder="123"> </td>
+                                                            <td class="center">
+                                                                <a class="btn btn-default btn-xs btn-rounded sibling" href="javascript:;" style="padding: 3px 6px;">
+                                                                    <i class="fa fa-plus"></i>
+                                                                    同级</a>
+                                                                <a class="btn btn-default btn-xs btn-rounded child" href="javascript:;" style="padding: 3px 6px;">
+                                                                    <i class="fa fa-plus"></i>
+                                                                    子级</a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <td>
+                                                                <a class="btn btn-default btn-sm btn-rounded addsibling" href="javascript:;">添加字段</a>
+                                                                <a class="btn btn-default btn-sm btn-rounded btn_response_data_type response_data_type_JSON" href="javascript:;" data-toggle="modal" data-target="#myModal" loadingType="Json" operateTable="response-table"> 导入JSON</a>
+                                                                <a class="btn btn-default btn-sm btn-rounded btn_response_data_type response_data_type_XML" href="javascript:;" data-toggle="modal" data-target="#myModal" loadingType="Xml" operateTable="response-table"  style="display: none"> 导入XML</a>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-4" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="col-sm-8">
+                                                    <table class="footable table table-stripped footable-loaded statusCode-table" data-page-size="8" data-filter="#filter">
+                                                        <thead>
+                                                        <th>状态码</th>
+                                                        <th>描述</th>
+                                                        <th>操作</th>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr class="gradeX footable-even" style="display: table-row;">
+                                                            <td><input type="text" name="name" class="form-control input-sm " placeholder="200"> </td>
+                                                            <td><input type="text" name="desc" class="form-control input-sm " placeholder="成功"></td>
+                                                            <td class="center"><a><i class="fa fa-trash-o m-l-xs delete" style="font-size: 16px;"></i></a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <td>
+                                                                <a class="btn btn-default btn-sm btn-rounded addStatusCode" href="javascript:;"><i class="fa fa-plus"></i> 添加</a>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-t-sm">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab-5" aria-expanded="true"> 成功示例</a>
+                                        </li>
+                                        <li class=""><a data-toggle="tab" href="#tab-6" aria-expanded="false">失败示例</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-5" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="col-sm-8">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_success_type" type="radio"  value="JSON" checked><i></i> JSON
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_success_type" type="radio" value="XML"><i></i> XML
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_success_type" type="radio" value="JSONP"><i></i> JSONP
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_success_type" type="radio" value="HTML"><i></i> HTML
+                                                    </label>
+                                                    <div class="m-t-sm">
+                                                        <textarea name="successgoback" class="form-control successgoback" rows="6" placeholder=""></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-6" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="col-sm-8">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_fail_type" type="radio"  value="JSON" checked><i></i> JSON
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_fail_type" type="radio" value="XML"><i></i> XML
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_fail_type" type="radio" value="JSONP"><i></i> JSONP
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input name="response_fail_type" type="radio" value="HTML"><i></i> HTML
+                                                    </label>
+                                                    <div class="m-t-sm">
+                                                        <textarea name="failgoback" class="form-control failgoback" rows="6" placeholder=""></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="areaJsonstr" value="{{.classify}}">
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <small class="font-bold">
+                <div class="ibox-content">
+                    <form id="envFrom" type="post" class="form-horizontal">
+                        <div class="col-sm-12">
+                            <textarea  name="leadingData" rows=5 class="form-control" required="" aria-required="true"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8 m-t-md">
+                                <input type="hidden" name="loadingType" value="">
+                                <input type="hidden" name="operateTable" value="">
+                                <button type="button" class="btn btn-w-m btn-info btn-leadingData" >提 交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </small></div>
+        <small class="font-bold">
+        </small></div>
+    <small class="font-bold">
+    </small>
+</div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/plugins/ObjTree/lib/XML/ObjTree.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/apiInfo.js"></script>
+<script >
+    $(function () {
+
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+    })
+</script>

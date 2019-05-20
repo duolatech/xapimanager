@@ -1,0 +1,30 @@
+{
+  "debug":          true,
+  "server_port":    "3000",
+  "server_website": "http://127.0.0.1:3000",
+
+  "mysql_ip":       "127.0.0.1",
+  "mysql_port":     "3306",
+  "mysql_username": "root",
+  "mysql_password": "root123",
+  "mysql_dbname":   "qiyu",
+  "mysql_prefix":   "qy_",
+
+  "redis_ip":       "127.0.0.1",
+  "redis_port":     "6379",
+  "redis_password": "",
+  "redis_db":       1,
+
+  "log_path":       "storage/logs",
+  "template_pate":  "resources/templates",
+  "assets_path":    "resources/assets",
+  "upload_path":    "storage/upload",
+
+  "DbLogMode":        true,
+  "DbMaxIdleConns":   200,
+  "DbMaxOpenConns":   2000,
+  "DbConnMaxLifetime": 5,
+
+  "user_cache": 600,
+  "sys_cache":  5
+}

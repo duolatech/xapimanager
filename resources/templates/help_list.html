@@ -1,0 +1,27 @@
+{{template "header.html" .}}
+<link rel="stylesheet" href="/assets/js/plugins/pagination/pagination.css">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row helpcenter">
+        </div>
+        <div>
+            <div class="M-box"></div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/pagination/jquery.pagination.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/help.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        ajaxHelpList({page:1}, 1);
+
+    })
+</script>

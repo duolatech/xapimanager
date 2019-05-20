@@ -1,0 +1,123 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/assets/css/select.min.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content forum-container">
+                        <div class="forum-title">
+                            <h3><a href="/project">项目列表 </a> / {{if gt .project.Id 0}}项目修改{{else}}创建项目{{end}}</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="myForm" method="post" class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">项目名称</label>
+
+                                                <div class="col-sm-10">
+                                                    <input name="project" type="text" class="form-control" value="{{.project.Proname}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">项目描述</label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="desc" class="form-control" aria-required="true">{{.project.Desc}}</textarea>
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">项目开放</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="attribute" value="1" {{if or (eq .project.Attribute 1) (eq .project.Attribute 0)}} checked {{end}}> 对团队下的所有权限组开放
+                                                    </label>
+                                                    <label class="checkbox-inline i-checks">
+                                                        <input type="radio" name="attribute"  value="2" {{if eq .project.Attribute 2}} checked {{end}}> 对团队下的指定权限组开放
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group project-member" style="display:none;">
+                                                <label class="col-sm-2 control-label">项目成员</label>
+                                                <div class="col-sm-10">
+                                                    <div
+                                                            class="ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid ng-dirty open"
+                                                            multiple="multiple" theme="bootstrap" ng-disabled="disabled">
+                                                        <div>
+                                                        <span class="ui-select-match" placeholder="Select person...">
+                                                            {{range .group}}
+                                                                    <span class="ng-scope">
+                                                                        <span style="margin-right: 3px;" class="ui-select-match-item btn btn-default btn-xs" tabindex="-1" type="button">
+                                                                            <span class="close ui-select-match-close">&nbsp;×</span>
+                                                                            <span uis-transclude-append="">
+                                                                                <span class="ng-binding ng-scope">
+                                                                                        {{.Groupname}}
+                                                                                </span>
+                                                                            </span>
+                                                                            <input type="hidden" value="{{.Id}}" name="groups[]" />
+                                                                        </span>
+                                                                    </span>
+                                                            {{end}}
+                                                        </span>
+                                                            <input type="text" autocomplete="off"
+                                                                   autocorrect="off" autocapitalize="off" spellcheck="false"
+                                                                   class="ui-select-search input-xs ng-pristine ng-valid ng-touched"
+                                                                   placeholder="" style="width: 503px;">
+                                                        </div>
+                                                        <ul
+                                                                class="ui-select-choices ui-select-choices-content dropdown-menu ng-scope"
+                                                                role="menu" aria-labelledby="dLabel" group-by="someGroupFn" style="display:none;">
+                                                            <li class="ui-select-choices-group ng-scope"><div
+                                                                        class="divider ng-hide"></div>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-2">
+                                                    <input type="hidden" name="proid" value="{{.project.Id}}">
+                                                    <button class="btn btn-primary btn-info-submit" type="submit">保存</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/project.js"></script>
+<script >
+    $(function () {
+
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+    })
+</script>

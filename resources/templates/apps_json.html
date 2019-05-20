@@ -1,0 +1,39 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/assets/js/plugins/jsonview/jquery.jsonview.min.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="mail-tools tooltip-demo m-sm m-l-none">
+                        <div class="btn-group pull-right">
+                            <a href="/apps/trans">JSON/XML互转</a>
+                        </div>
+                        <button class="btn btn-white btn-sm"><a href="/apps"><i class="fa fa-mail-reply-all"></i> 返回应用列表</a></button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3>JSON格式化、压缩：<a href="javscript:;" class="jsonExample">JSON样例</a></h3>
+                            <textarea id="format-import" class="form-control"  style="height: 460px;background-color: #528B8B;color: #ffffff"></textarea>
+                            <div class="m-t-sm">
+                                <button type="button" class="btn btn-w-m btn-info JsonFormat">格式化</button>
+                                <button type="button" class="btn btn-w-m btn-info JsonCompress">压缩</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <h4>输出数据：</h4>
+                            <div id="format-export" class="form-control" style="height:100%;min-height: 460px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/assets/js/plugins/jsonview/jquery.jsonview.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/apps.js"></script>

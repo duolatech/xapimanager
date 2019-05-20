@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>{{ .website.sitename }}</title>
+    <meta name="keywords" content="{{.website.keywords}}">
+    <meta name="description" content="{{.website.description}}">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/login.css" rel="stylesheet">
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+<body class="signin">
+<div class="signinpanel">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-6"></div>
+            <div class="col-sm-4">
+                <div class="navbar-brand block m" style="font-size:26px;">{{ .website.title }} - 注册</div>
+                <form name="form" id="registerForm" method="post">
+                    <input type="text" name="username" class="form-control valid" placeholder="用户名">
+                    <span class="help-block m-b-none text-danger"></span>
+                    <input type="text" name="phone" class="form-control valid" placeholder="手机号">
+                    <span class="help-block m-b-none text-danger"></span>
+                    <input type="text" name="email" class="form-control valid" placeholder="邮箱">
+                    <span class="help-block m-b-none text-danger"></span>
+                    <input type="password" name="password" class="form-control valid" placeholder="密码">
+                    <span class="help-block m-b-none text-danger"></span>
+                    <span class="help-block m-b-none text-danger sliderValide"></span>
+                    <div class="m-t-xs">
+                        <input type="hidden" name="identify" value="{{.invite}}">
+                        <button type="submit" class="btn btn-w-m btn-info register-submit">注 册</button>
+                        <a href="/login" class="btn btn-primary">登 录</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/md5.min.js"></script>
+<script src="/assets/js/login.js"></script>
+<script type="text/javascript">
+    $(function(){
+        {{if gt .org.Id 0}}
+        swal({
+                title: "检查到您已登录，请确认是否加入组织（{{.org.Name}}）",
+                text: "组织口号：{{.org.Desc}}",
+                type: "info",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: "加入",
+                cancelButtonText: "考虑一下"
+            },
+            function(){
+                var identify = {{.org.Identify}};
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url:"/organize/addition/"+identify,
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': ''
+                    },
+                    success: function(res) {
+                        if(res.status==200){
+                            swal("加入成功", "2s后将跳转到我的团队","success")
+                            setTimeout(function(){
+                                window.location.href="/organize";
+                            }, 2000);
+                        }else{
+                            swal("请求出错", res.message, "error")
+                        }
+                    },
+                    error: function(request) {
+                        swal("网络错误", "请稍后重试！","error")
+                    },
+                });
+            });
+        {{end}}
+    })
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?821b76173f83e2686aebf84e800b828e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</html>

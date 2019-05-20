@@ -1,0 +1,56 @@
+{{template "header.html" .}}
+<link href="/assets/js/plugins/froala/css/froala_style.min.css" rel="stylesheet" type="text/css">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content forum-container">
+                        <div class="forum-title">
+                            <h3><a href="{{.cateListUrl}}">分类列表 </a>/ 分类介绍</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="categoryForm" method="post" class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">分类名称:</label>
+                                                <div class="col-sm-10">
+                                                    <div style="padding: 7px 12px;">{{.classify.Classifyname}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">分类描述:</label>
+                                                <div class="col-sm-10">
+                                                    <div class="fr-view" style="padding: 7px 12px;">
+                                                        {{.desc}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/category.js"></script>
+<script >
+    $(function () {
+
+        //实例化编辑器
+        var um = UM.getEditor('myEditor');
+
+    })
+</script>

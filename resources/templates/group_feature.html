@@ -1,0 +1,85 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+
+                    <div class="ibox-content forum-container">
+
+                        <div class="forum-title">
+                            <h3><a href="/group">权限管理 </a> / 功能权限 </h3>
+                        </div>
+                            <form method="POST" id="feature" class="ibox-content">
+                                <div class="dd" id="nestable">
+                                    {{$node := .node}}
+                                    {{$rules := .rules}}
+                                    {{$operate := .operate}}
+                                    {{range .apimenu}}
+                                    <ol class="dd-list">
+                                        {{range $index, $elem :=.Child}}
+                                            {{$le:= len .Child}}
+                                            <li class="dd-item grandfather" data-id="1">
+                                                <div class="dd-handle icheckbox">
+                                                    <label class="m-b-none">
+                                                        {{$have := inArray .QyAuthRule.Id $rules}}
+                                                        <input type="checkbox" name="rules[]" class="oneCheck" value="{{.QyAuthRule.Id}}" {{if eq $have true}} checked {{end}} >
+                                                        <i></i> {{.QyAuthRule.Title}}
+                                                    </label>
+                                                </div>
+                                                <ol class="dd-list" style="">
+                                                    {{range .Child}}
+                                                        <li class="dd-item father" data-id="2">
+                                                            <div class="dd-handle icheckbox">
+                                                                <label class="m-b-none m-l-md">
+                                                                    {{$have := inArray .QyAuthRule.Id $rules}}
+                                                                    <input type="checkbox" name="rules[]" class="twoCheck" value="{{.QyAuthRule.Id}}" {{if eq $have true}} checked {{end}}>
+                                                                    <i></i> {{.QyAuthRule.Title}}
+                                                                </label>
+                                                            </div>
+                                                            <ol class="dd-list" style="">
+                                                                {{$id := .QyAuthRule.Id}}
+                                                                {{range $k, $v:= $node}}
+                                                                    {{if eq $k $id}}
+                                                                        <li class="dd-item" data-id="3">
+                                                                            <div class="dd-handle icheckbox">
+                                                                            {{range $v}}
+                                                                                <label class="m-b-none m-l-lg">
+                                                                                    {{$have := inArray .Id $operate}}
+                                                                                    <input type="checkbox" name="operate[]" class="thirdCheck" value="{{.Id}}" {{if eq $have true}} checked {{end}}>
+                                                                                    <i></i> {{.Title}}
+                                                                                </label>
+                                                                            {{end}}
+                                                                            </div>
+                                                                        </li>
+                                                                    {{end}}
+                                                                {{end}}
+                                                            </ol>
+                                                        </li>
+                                                    {{end}}
+                                                </ol>
+                                            </li>
+                                        {{end}}
+                                    </ol>
+                                    {{end}}
+                                </div>
+                                <input type="hidden" name="gid" value="{{.gid}}">
+                                <button class="btn btn-sm btn-info btn-submit-feature" type="submit">保存</button>
+                            </form>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/nestable/jquery.nestable.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/group.js"></script>

@@ -1,0 +1,88 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+
+                    <div class="ibox-content m-b-sm border-bottom">
+
+                        <div class="forum-item">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="pull-left  m-r-md">
+                                        <i class="fa fa-globe text-navy mid-icon"></i>
+                                    </div>
+                                    <h2>寻找团队</h2>
+                                    <span>加入团队后才能查看、编辑该团队下的项目</span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group m-t-md osearch">
+                                        <input type="text" placeholder="根据OrganizeNo，查找您的团队" class="input form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn btn-primary" identify = {{.organizeId}}> <i class="fa fa-search"></i> 搜索</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <search id="seachresult">
+
+                    </search>
+                    <div class="ibox-content forum-container">
+
+                        <div class="forum-title">
+                            <h3><a href="/organize">我的团队 </a> / 编辑团队信息</h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="myForm" method="post" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">团队名</label>
+
+                                                <div class="col-sm-10">
+                                                    <input name="organize_name" type="text" class="form-control" value="{{.org.Name}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">团队口号</label>
+                                                <div class="col-sm-10">
+                                                    <input name="organize_desc" type="text" class="form-control" value="{{.org.Desc}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-2">
+                                                    <button class="btn btn-primary btn-info-submit" type="submit" oid="{{.org.Id}}">保存</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/organize.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>

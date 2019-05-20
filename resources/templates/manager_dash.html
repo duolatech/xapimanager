@@ -1,0 +1,85 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-9" style="padding-right:0;">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="border-bottom:none;background:#fff;">
+                        <h5>各城市Api调用次数统计，每五分钟更新一次数据(模拟数据，后期开放……)</h5>
+                    </div>
+                    <div class="ibox-content ibox-url" style="border-top:none;" iboxurl="/manager/{{.proid}}/dash/area">
+                        <div id="main" style="height: 600px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3" style="padding-left:0;">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content"  style="height: 676px;border-top:none;background-color:#e4eaec;">
+                        <div class="">
+                            <div class="m-b-md">
+                                <h3>各城市调用占比</h3>
+                            </div>
+                        </div>
+                        <h5>北京</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>上海</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 55%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-warning">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>广州</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 45%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar .progress-bar-danger">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>深圳</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 65%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-info">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>成都</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 35%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>杭州</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 35%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-warning">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>大连</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 45%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar .progress-bar-danger">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <h5>青岛</h5>
+                        <div class="progress progress-striped active">
+                            <div style="width: 15%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-info">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/echarts/echarts.min.js"></script>
+<script src="/assets/js/plugins/echarts/china.js"></script>
+<script type="text/javascript" src="/assets/js/statistics.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script type="text/javascript">
+
+</script>

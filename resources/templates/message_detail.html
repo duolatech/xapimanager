@@ -1,0 +1,38 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12 animated fadeInRight">
+                <div class="mail-box-header">
+                    <h2>
+                        <a href="/message/list">消息列表</a> / 消息内容
+                    </h2>
+                    <div class="mail-tools tooltip-demo m-t-md">
+                        <h3>
+                            <span>标题： </span>{{.data.subject}}
+                        </h3>
+                        <h5>
+                            <span class="pull-right font-noraml">{{.data.sendtime}}</span>
+                            <span>发件人： </span>{{.data.sender}}
+                        </h5>
+                    </div>
+                </div>
+                <div class="mail-box">
+                    <div class="mail-body">
+                        {{.data.content}}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/message.js"></script>

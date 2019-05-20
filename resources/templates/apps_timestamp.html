@@ -1,0 +1,106 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content forum-container">
+                <div class="mail-tools tooltip-demo">
+                    <button class="btn btn-white btn-sm">
+                        <a href="/apps"><i class="fa fa-mail-reply-all"></i> 返回应用列表</a>
+                    </button>
+                    <label class="m-l-sm" style="font-size: 22px;">UNIX时间戳普通时间相互转换</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="float-e-margins">
+                            <div class="ibox-content">
+                                <form id="myForm" method="post" class="form-horizontal">
+                                    <div class="form-group"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">UNIX时间戳：</label>
+                                        <div class="col-sm-10">
+                                            <input name="timestamp" type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+                                        <div class="col-sm-10">
+                                            <button type="button" class="btn btn-primary toDate" id="to_str">
+                                                转换为普通日期 <span class="glyphicon glyphicon-arrow-down  glyphicon-align-right"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-primary toTimestamp" id="to_timestamp">
+                                                转换为UNIX时间戳 <span class="glyphicon glyphicon-arrow-up  glyphicon-align-right"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">普通日期：</label>
+                                        <div class="col-sm-10">
+                                            <input name="datetime" type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+                                        <div class="col-sm-10">
+                                            <p>Unix时间戳(Unix timestamp)，或称Unix时间(Unix time)、POSIX时间(POSIX time)，是一种时间表示方式，定义为从格林威治时间1970年01月01日00时00分00秒起至现在的总秒数。</p>
+                                            <p>当前UNIX时间戳（基于浏览器时间）：<strong><span class="text-green nowTime" style="font-size: 18px;"></span></strong></p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script type="text/javascript">
+    $(function(){
+        //获取时间戳
+        var timestamp = parseInt(new Date().getTime()/1000);
+        //获取日期
+        var datetime = timestampTodate(timestamp);
+        $('input[name="timestamp"]').val(timestamp);
+        $('input[name="datetime"]').val(datetime);
+
+        setInterval(function(){
+            timestamp = parseInt(new Date().getTime()/1000);
+            $(".nowTime").text(timestamp)
+        }, 1000);
+    });
+    //时间戳转日期,11位时间戳 1552200840
+    function timestampTodate(timestamp){
+
+        var date = new Date(timestamp*1000);
+        dateTime = date.toLocaleDateString().replace(/\//g, "-") + " " + date.toTimeString().substr(0, 8);
+        return dateTime
+    }
+    //日期转时间戳 2019-3-10 14:59:09
+    function dateTotimestamp(date){
+        date = date.substring(0,19);
+        date = date.replace(/-/g,'/');
+        var timestamp = new Date(date).getTime();
+        timestamp = parseInt(timestamp/1000);
+        return timestamp
+    }
+    //转时间戳
+    $(".toTimestamp").on("click",function(){
+        var datetime = $('input[name="datetime"]').val();
+        var to =  dateTotimestamp(datetime);
+        $('input[name="timestamp"]').val(to);
+    });
+    //转日期
+    $(".toDate").on("click",function(){
+        var timestamp = $('input[name="timestamp"]').val();
+        var to = timestampTodate(timestamp);
+        $('input[name="datetime"]').val(to);
+    });
+
+
+
+</script>

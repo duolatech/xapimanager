@@ -1,0 +1,102 @@
+{{template "header.html" .}}
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/assets/css/select.min.css" rel="stylesheet">
+<link href="/assets/js/plugins/froala/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/js/plugins/froala/css/froala_style.min.css" rel="stylesheet" type="text/css">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content forum-container">
+                        <div class="forum-title">
+                            <h3><a href="/help/list">帮助中心 </a>/ {{if gt 1 0}} 编辑文章 {{else}}添加文章{{end}}</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="float-e-margins">
+                                    <div class="ibox-content">
+                                        <form id="HelpForm" method="post" class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">标题</label>
+
+                                                <div class="col-sm-11">
+                                                    <input name="title" type="text" class="form-control" value="{{.data.title}}">
+                                                    <span class="help-block m-b-none text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">内容</label>
+                                                <div class="col-sm-11">
+                                                    <textarea id="helpcontent" name="content">{{.data.content}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-2">
+                                                    <input type="hidden" name="hid" value="{{.data.id}}">
+                                                    <button class="btn btn-primary btn-info-submit" type="submit">保 存</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/plugins/froala/js/froala_editor.pkgd.min.js"></script>
+<script src="/assets/js/plugins/froala/js/languages/zh_cn.js"></script>
+<script src="/assets/js/content.js?v=4.1.0"></script>
+<script src="/assets/js/help.js"></script>
+<script >
+    $(function (){
+
+        //大屏幕
+        var toolbarButtonsMD = ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'color', 'align', 'formatUL', 'outdent', 'indent', 'quote', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo'];
+        //小屏幕
+        var toolbarButtonsSM = ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo'];
+        //手机
+        var toolbarButtonsXS = ['bold', 'italic', 'fontFamily', 'fontSize', 'undo', 'redo'];
+        //编辑器初始化并赋值
+        $('#helpcontent').froalaEditor({
+            placeholderText: '请输入内容',
+            charCounterCount       : true,//默认
+            // charCounterMax         : -1,//默认
+            saveInterval            : 0,//不自动保存，默认10000
+            //theme                    : "red",
+            height                   : "300px",
+            toolbarBottom           : false,//默认
+            toolbarButtons          : toolbarButtonsMD,
+            toolbarButtonsMD        : toolbarButtonsMD,
+            toolbarButtonsSM        : toolbarButtonsSM,
+            toolbarButtonsXS        : toolbarButtonsXS,
+            toolbarInline           : false,//true选中设置样式,默认false
+            imageUploadMethod       : 'POST',
+            heightMin: 300,
+            charCounterCount        : true,//默认
+            charCounterMax: -1,     //最大字数限制，-1为不限制
+            osave: true,
+            autosaveInterval: 2500,
+            saveURL: 'hander/FroalaHandler.ashx',    //自动保存的地址（body参数为html内容）
+            saveParams: { postId: '1'},  //保存内容时传的参数
+            spellcheck: false,  //是否允许浏览器对输入内容进行拼写检查
+            imageUploadURL: '/uploads/image',//上传到本地服务器
+            //imageUploadParams: {pid: '1'},
+            enter: $.FroalaEditor.ENTER_BR,   //设置回车键功能
+            language: 'zh_cn'
+
+        });
+    })
+</script>

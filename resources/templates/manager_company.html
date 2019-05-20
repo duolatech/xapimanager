@@ -1,0 +1,81 @@
+{{template "header.html" .}}
+<link rel="stylesheet" href="/assets/js/plugins/pagination/pagination.css">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content">
+                        <div class="m-t-xs m-b-xs">
+                            <strong style="font-size:20px;">密钥列表</strong>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form class="form-inline ng-pristine" role="form">
+                                    <div class="form-group">
+                                        <input type="text" name="comapany" class="form-control"  placeholder="企业名">
+                                    </div>
+                                    <a href="javascript:;" class="btn btn-info btn-search">搜索</a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="nav nav-tabs">
+                                <span class="pull-right small text-muted totalCount">统计中…</span>
+                            </div>
+                            <div class="tab-content">
+                                <div class="table-responsive">
+                                    <div class="spiner-loading" style="display: none;">
+                                        <div class="sk-spinner sk-spinner-three-bounce">
+                                            <div class="sk-bounce1"></div>
+                                            <div class="sk-bounce2"></div>
+                                            <div class="sk-bounce3"></div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover" style="margin-bottom: 0px;">
+                                        <thead>
+                                        <tr>
+                                            <th>企业名</th>
+                                            <th>AppId</th>
+                                            <th>AppSecret</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot class="hide-if-no-paging">
+                                        <tr>
+                                            <input type="hidden" name="ajaxCompanyUrl" value="/manager/{{.proid}}/company/list">
+                                            <td colspan="5" class="text-center footable-visible">
+                                                <div class="M-box"></div>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/pagination/jquery.pagination.min.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/company.js"></script>
+<script>
+    //第一页数据
+    $(function(){
+        ajaxApiList({page:1},1);
+    });
+
+</script>

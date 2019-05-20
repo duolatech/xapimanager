@@ -1,0 +1,126 @@
+{{template "header.html" .}}
+<link rel="stylesheet" href="/assets/js/plugins/pagination/pagination.css">
+<link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<body class="gray-bg">
+<div class="row">
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content">
+                        <div class="m-t-xs m-b-xs">
+                            <strong style="font-size:20px;">待审核 Api</strong>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form class="form-inline ng-pristine" role="form">
+                                    <div class="form-group">
+                                        <input type="text" name="apiname" class="form-control"  placeholder="Api 名称">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="author" class="form-control"  placeholder="开发人">
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="auditStatus" class="form-control">
+                                            <option value="0">全部</option>
+                                            <option value="2">待审核</option>
+                                            <option value="5">已拒绝</option>
+                                        </select>
+                                    </div>
+                                    <a href="javascript:;" class="btn btn-info search">搜索</a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="nav nav-tabs">
+                                <span class="pull-right small text-muted totalCount">3个用户</span>
+                            </div>
+                            <div class="tab-content">
+                                <div class="table-responsive">
+                                    <div class="spiner-loading" style="display: none;">
+                                        <div class="sk-spinner sk-spinner-three-bounce">
+                                            <div class="sk-bounce1"></div>
+                                            <div class="sk-bounce2"></div>
+                                            <div class="sk-bounce3"></div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover" style="margin-bottom: 0px;">
+                                        <thead>
+                                        <tr>
+                                            <th>Api 名称</th>
+                                            <th>版本</th>
+                                            <th>URI</th>
+                                            <th>维护人</th>
+                                            <th>修改时间</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot class="hide-if-no-paging">
+                                        <tr>
+                                            <input type="hidden" name="ajaxApiUrl" value="/manager/{{.proid}}/Api">
+                                            <input type="hidden" name="ApiAuditUrl" value="/manager/{{.proid}}/Api/audit">
+                                            <td colspan="5" class="text-center footable-visible">
+                                                <div class="M-box"></div>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <small class="font-bold">
+                <div class="ibox-content">
+                    <form id="envFrom" type="post" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">拒绝原因：</label>
+                            <div class="col-sm-8">
+                                <textarea  name="refuse" rows=5 class="form-control" required="" aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <input type="hidden" name="did" value="">
+                                <input type="hidden" name="status" value="2">
+                                <button type="button" class="btn btn-w-m btn-info btn-info-submit" >提 交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </small></div>
+        <small class="font-bold">
+        </small></div>
+    <small class="font-bold">
+    </small>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/pagination/jquery.pagination.min.js"></script>
+<script src="/assets/js/manager.js"></script>
+<script src="/assets/js/renderlayer.js"></script>
+<script src="/assets/js/apiaudit.js"></script>
+<script>
+    $(function(){
+        //查询条件
+        var con = {};
+        //第一页数据
+        var data = $.extend({page:1, status:"2,5"}, con);
+        ajaxApiList(data,1);
+    });
+</script>
