@@ -241,7 +241,7 @@ if($("#envFrom").length>0){
     });
     //域名网站
     jQuery.validator.addMethod("UrlCheck", function(value, element) {
-        return this.optional(element) || /^((https|http)?:\/\/)+[A-Za-z0-9]+(\.[A-Za-z0-9]+)+((:)+[0-9]{1,5})?(\/)?$/.test(value);
+        return this.optional(element) || /^((https|http)?:\/\/)+[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+((:)+[0-9]{1,5})?(\/)?$/.test(value);
     }, "请输入正确的域名地址");
     //排序数字检查
     jQuery.validator.addMethod("NumberCheck", function(value, element) {
