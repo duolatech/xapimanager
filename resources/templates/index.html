@@ -80,7 +80,7 @@
         //新版本检查
         if ($.cookie('checkUpdate')!=1){
             var checkUpdate = $.cookie('checkUpdate',1,{expires:7,path:'/'});
-            var url = "http://xapi.smaty.net";
+            var url = "http://xapi.smaty.net/";
             $.ajax({
                 url:url+"website/update",
                 dataType:'jsonp',
