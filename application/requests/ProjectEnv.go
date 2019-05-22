@@ -46,7 +46,7 @@ func ProjectEnv() gin.HandlerFunc {
 func envDomain(fl validator.FieldLevel) bool {
 
 	domain := fl.Field().String()
-	matched, _ := regexp.MatchString(`^((https|http)?:\/\/)+[A-Za-z0-9]+(\.[A-Za-z0-9]+)+((:)+[0-9]{1,5})?(\/)?$`, domain)
+	matched, _ := regexp.MatchString(`^((https|http)?:\/\/)+[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+((:)+[0-9]{1,5})?(\/)?$`, domain)
 
 	return matched
 }
