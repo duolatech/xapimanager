@@ -66,7 +66,7 @@ if($("#loginForm").length>0){
             },
             pass:{
                 required:true,
-                maxlength:12,
+                maxlength:32,
                 minlength:6
             },
         },
@@ -78,7 +78,7 @@ if($("#loginForm").length>0){
             },
             pass :{
                 required:"密码不能为空",
-                maxlength:"不能超过12个字符",
+                maxlength:"不能超过32个字符",
                 minlength:"不能少于6个字符",
             },
 
@@ -215,7 +215,7 @@ if($("#resetForm").length>0){
         rules:{
             pass:{
                 required:true,
-                maxlength:16,
+                maxlength:32,
                 minlength:6
             },
             repass:{
@@ -225,7 +225,7 @@ if($("#resetForm").length>0){
         messages:{
             pass :{
                 required : "请输入密码",
-                maxlength : "不能超过16个字符",
+                maxlength : "不能超过32个字符",
                 minlength: "不能少于6个字符"
             },
             repass:{
@@ -289,7 +289,7 @@ if($("#registerForm").length>0){
         rules:{
             username:{
                 required:true,
-                maxlength:20,
+                maxlength:32,
                 minlength:2,
                 remote: {
                     url: "/register/check",
@@ -354,7 +354,7 @@ if($("#registerForm").length>0){
             },
             password :{
                 required:"密码不能为空",
-                maxlength:"不能超过20个字符",
+                maxlength:"不能超过32个字符",
                 minlength:"不能少于6个字符",
             },
             phone :{
