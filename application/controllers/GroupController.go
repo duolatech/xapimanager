@@ -1,14 +1,14 @@
 package controllers
 
 import (
-	"xapimanager/application/Services"
-	"xapimanager/application/common"
-	"xapimanager/application/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+	"xapimanager/application/Services"
+	"xapimanager/application/common"
+	"xapimanager/application/models"
 )
 
 //获取权限组列表
@@ -75,6 +75,9 @@ func GroupSave(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status":  status,
 		"message": message,
+		"data": map[string]interface{}{
+			"group_id": optid,
+		},
 	})
 }
 

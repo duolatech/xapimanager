@@ -16,9 +16,9 @@ if($("#myForm").length>0){
                 success: function(res) {
                     $(".btn-info-submit").attr('disabled',false);
                     if(res.status==200){
-                        swal("保存成功", "2s后将返回权限管理！","success")
+                        swal("保存成功", "2s后进入功能权限设置页面！","success");
                         setTimeout(function(){
-                            window.location.href="/group";
+                            window.location.href="/group/featureAuth/"+res.data.group_id;
                         }, 2000);
                     }else{
                         swal("请求出错", res.message, "error")
@@ -159,7 +159,7 @@ function nodeFather(obj){
     var grandfather = obj.parents('.grandfather').find('.oneCheck');
     grandfather.prop("checked", flag);
 }
-
+//功能权限保存
 $(".btn-submit-feature").on("click", function () {
     obj = $(this);
     obj.attr('disabled',true);

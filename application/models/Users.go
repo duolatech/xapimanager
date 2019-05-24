@@ -256,7 +256,7 @@ func UpdateUserGroup(uid int, group_id int) (result bool) {
 	defer Db.Close()
 	Db = Connect()
 	var count int
-	Db.Hander.Table("qy_auth_access").Where("uid = ?", uid).Count(&count)
+	Db.Hander.Table("qy_auth_access").Where("uid = ? and group_id = ?", uid, group_id).Count(&count)
 	if count > 0 {
 		err := Db.Hander.Table("qy_auth_access").Where("uid = ?", uid).Update("group_id", group_id).Error
 		if err != nil {

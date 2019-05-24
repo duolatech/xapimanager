@@ -10,7 +10,6 @@ type ResetRequest struct {
 	Pass      string `form:"pass" binding:"required" validate:"required,max=32,min=16"`
 	Repass    string `form:"repass" binding:"required" validate:"required,max=32,min=16"`
 	Resetinfo string `form:"resetinfo" binding:"required" validate:"required,max=100,min=6"`
-	SliderNum string `form:"sliderNum" binding:"required" validate:"required,min=2"`
 }
 
 func ResetVerify() gin.HandlerFunc {

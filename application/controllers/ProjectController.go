@@ -1,14 +1,14 @@
 package controllers
 
 import (
-	"xapimanager/application/Services"
-	"xapimanager/application/models"
-	"xapimanager/config"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 	"time"
+	"xapimanager/application/Services"
+	"xapimanager/application/models"
+	"xapimanager/config"
 )
 
 //获取项目列表
@@ -110,6 +110,9 @@ func ProjectSave(c *gin.Context) {
 		}
 		models.OperateLog("新增项目", 1, c)
 	}
+	uid := userInfo.(map[string]interface{})["uid"].(int)
+	key := "qy_user_project_list#" + strconv.Itoa(uid)
+	Services.ClearCache(key)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  200,
 		"message": "保存成功",

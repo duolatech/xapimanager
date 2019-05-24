@@ -94,10 +94,7 @@ if($("#loginForm").length>0){
 if($("#forgetForm").length>0){
     var validator = $("#forgetForm").validate({
         submitHandler: function(form) {
-            if (sliderNum.length==0){
-                $(".sliderValide").text("请拖动滑块进行验证");
-                return
-            }
+
             $(".forget-submit").attr('disabled',true);
             swal({
                 title: "发送中，请稍等……！",
@@ -123,12 +120,10 @@ if($("#forgetForm").length>0){
                     if(res.status==200){
                         swal("发送成功", res.message, "success")
                     }else{
-                        resetSlider();
                         swal("请求出错", res.message, "error")
                     }
                 },
                 error: function(request) {
-                    resetSlider();
                     $(".forget-submit").attr('disabled',false);
                     swal("网络错误", "请稍后重试！","error")
                 }
@@ -159,10 +154,6 @@ if($("#resetForm").length>0){
     var validator = $("#resetForm").validate({
         submitHandler: function(form) {
             var obj = $(".reset-submit");
-            if (sliderNum.length==0){
-                $(".sliderValide").text("请拖动滑块进行验证");
-                return
-            }
             obj.attr('disabled',true);
             var pass = $('input[name="pass"]').val();
             var repass = $('input[name="repass"]').val();
@@ -190,7 +181,6 @@ if($("#resetForm").length>0){
                         }, 2000);
 
                     }else{
-                        resetSlider();
                         swal({
                                 title: "请求出错",
                                 text: res.message,
@@ -206,7 +196,6 @@ if($("#resetForm").length>0){
                     }
                 },
                 error: function(request) {
-                    resetSlider();
                     obj.attr('disabled',false);
                     swal("网络错误", "请稍后重试！","error")
                 }

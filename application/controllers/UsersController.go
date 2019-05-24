@@ -1,13 +1,13 @@
 package controllers
 
 import (
-	"xapimanager/application/Services"
-	"xapimanager/application/common"
-	"xapimanager/application/models"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+	"xapimanager/application/Services"
+	"xapimanager/application/common"
+	"xapimanager/application/models"
 )
 
 var encryptKey = "9hUxqaGelNnCZaCW"
@@ -174,6 +174,7 @@ func AjaxUserList(c *gin.Context) {
 	//用户自己的组织信息
 	userInfo, _ := c.Get("user")
 	uid := userInfo.(map[string]interface{})["oid"].(int)
+
 	//查询数据
 	result := models.GetOrganizeUsers(uid, keyword, userStatus, userGroup, start, limit)
 

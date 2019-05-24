@@ -5,6 +5,13 @@
 
     <div class="error-desc">
         <br>您可以返回主页看看
-        <br><a href="/main" class="btn btn-primary m-t">主页</a>
+        <br><a href="javascript:;" class="btn btn-primary m-t jumphome">主页</a>
     </div>
 </div>
+<script>
+    $(function () {
+        $(".jumphome").on("click", function(){
+            window.parent.parent.location.href= "/main";
+        });
+    })
+</script>

@@ -1,12 +1,12 @@
 package middleware
 
 import (
-	"xapimanager/application/Services"
-	"xapimanager/application/common"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"regexp"
 	"strconv"
+	"xapimanager/application/Services"
+	"xapimanager/application/common"
 )
 
 //需排除权限限制的页面
@@ -78,7 +78,7 @@ func AuthCheck() gin.HandlerFunc {
 		if !authflag {
 			c.HTML(http.StatusOK, "404.html", gin.H{
 				"status":  513,
-				"message": "您没有权限访问该页面",
+				"message": "您没有权限访问该页面，请联系管理员",
 			})
 			c.Abort()
 		}

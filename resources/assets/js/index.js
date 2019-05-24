@@ -63,9 +63,10 @@ $(function(){
         }
     }
     //获取未读消息,每五分钟获取一次
-    setInterval(function(){
+    GetUnread();
+    window.setInterval(function(){
         GetUnread();
-    }, 5*60*1000);
+    }, 300000);
 
 });
 /*!
