@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"xapimanager/application/Services"
-	"xapimanager/application/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+	"xapimanager/application/Services"
+	"xapimanager/application/models"
 )
 
 type UserOrganize struct {
@@ -30,9 +30,7 @@ func OrganizeList(c *gin.Context) {
 	//查询用户自己的团队信息
 	self := models.GetUserOrganize(uid)
 	if self.Id == 0 {
-		data := map[string]interface{}{}
-		orgId := models.OrganizeCreate(uid, data)
-		models.OrganizeJoin(uid, orgId, 1)
+		models.OrganizeJoin(uid, 1, 1)
 	}
 
 	organize := models.GetOrganize(uid)
