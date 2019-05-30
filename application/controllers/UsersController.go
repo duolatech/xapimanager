@@ -102,7 +102,7 @@ func AjaxRegister(c *gin.Context) {
 		uid := models.UserSave(data)
 		if uid > 0 {
 			//加入组织
-			models.OrganizeJoin(uid, 1, 1)
+			models.OrganizeJoin(uid, 1, 2)
 			c.JSON(http.StatusOK, gin.H{
 				"status":  200,
 				"message": "注册成功",
