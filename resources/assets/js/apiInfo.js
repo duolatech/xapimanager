@@ -289,7 +289,7 @@ var validator = $("#myForm").validate({
                 if(res.status==200){
                     swal("保存成功,等待审核", "2s后将返回Api列表！","success")
                     setTimeout(function(){
-                        window.location.href="/manager/"+proid+"/Api/list";
+                        //window.location.href="/manager/"+proid+"/Api/list";
                     }, 2000);
                 }else{
                     swal("请求出错", res.message, "error")
@@ -484,18 +484,21 @@ function createJson(valueType, regstr,  gather) {
             var isdeal = strobj.attr("isdeal");
             var data_id = strobj.attr("data-id");
             var reg = new RegExp("^" + regstr + "$","g");
-            if(reg.test(data_id)){
+            if(data_id.match(reg)){
                 var field = strobj.find('.fieldname').val();
                 var value = strobj.find('.default').val();
                 var subValueType = strobj.find('.valueType').val();
-                if (subValueType == "object" || subValueType == "array"){
-                    content[field] = createJson(subValueType, regstr + "-(\\d+)", gather);
+                if (subValueType == "object"){
+                    content[field] = createJson(subValueType, data_id.match(reg) + "-(\\d+)", gather);
+                }else if (subValueType == "array"){
+                    content[field] = createJson(subValueType, data_id.match(reg) + "-(\\d+)", gather);
                 }else{
                     if (isdeal!=1){
                         content[field] = value;
                         strobj.attr("isdeal",1)
                     }
                 }
+                console.log(content)
             }
         });
         return content;
@@ -507,13 +510,12 @@ function createJson(valueType, regstr,  gather) {
             var isdeal = strobj.attr("isdeal");
             var data_id = strobj.attr("data-id");
             var reg = new RegExp("^" + regstr + "$","g");
-
-            if(reg.test(data_id)){
+            if(data_id.match(reg)){
                 var field = strobj.find('.fieldname').val();
                 var value = strobj.find('.default').val();
                 var subValueType = strobj.find('.valueType').val();
                 if (subValueType == "object" || subValueType == "array" ){
-                    subcontent[field] = createJson(subValueType, regstr + "-(\\d+)", gather);
+                    subcontent[field] = createJson(subValueType, data_id.match(reg) + "-(\\d+)", gather);
                 }else{
                     if (isdeal!=1){
                         subcontent[field] = value;
@@ -535,7 +537,7 @@ function createJson(valueType, regstr,  gather) {
             var isdeal = strobj.attr("isdeal");
             var data_id = strobj.attr("data-id");
             var reg = new RegExp("^" + regstr + "$","g");
-            if(reg.test(data_id)){
+            if(data_id.match(reg)){
                 field = strobj.find('.fieldname').val();
                 value = strobj.find('.default').val();
                 if (isdeal!=1){
