@@ -289,7 +289,7 @@ var validator = $("#myForm").validate({
                 if(res.status==200){
                     swal("保存成功,等待审核", "2s后将返回Api列表！","success")
                     setTimeout(function(){
-                        //window.location.href="/manager/"+proid+"/Api/list";
+                        window.location.href="/manager/"+proid+"/Api/list";
                     }, 2000);
                 }else{
                     swal("请求出错", res.message, "error")
@@ -488,9 +488,7 @@ function createJson(valueType, regstr,  gather) {
                 var field = strobj.find('.fieldname').val();
                 var value = strobj.find('.default').val();
                 var subValueType = strobj.find('.valueType').val();
-                if (subValueType == "object"){
-                    content[field] = createJson(subValueType, data_id.match(reg) + "-(\\d+)", gather);
-                }else if (subValueType == "array"){
+                if (subValueType == "object" || subValueType == "array"){
                     content[field] = createJson(subValueType, data_id.match(reg) + "-(\\d+)", gather);
                 }else{
                     if (isdeal!=1){
@@ -498,7 +496,6 @@ function createJson(valueType, regstr,  gather) {
                         strobj.attr("isdeal",1)
                     }
                 }
-                console.log(content)
             }
         });
         return content;
