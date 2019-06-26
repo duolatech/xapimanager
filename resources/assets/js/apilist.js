@@ -1,5 +1,17 @@
 
 var subcon;
+//查询条件
+var con = {
+    'type' : getQueryString('type'),
+    'apiname' : getQueryString('apiname'),
+    'URI' : getQueryString('URI'),
+    'author' : getQueryString('author'),
+    'classify' : getQueryString('classify'),
+    'subClassify' : getQueryString('subClassify')
+};
+//第一页数据
+var data = $.extend({page:1, status:"1,2,3,5"}, con);
+ajaxApiList(data,1);
 
 //字母分类切换
 $('.classifyLetter').on({
@@ -36,7 +48,7 @@ function pagination(pageCount, status){
                 page: api.getCurrent(),
                 status: status
             };
-            if(subcon.subClassify){
+            if(subcon != undefined && subcon.subClassify){
                 data = $.extend(data, subcon);
             }else{
                 data = $.extend(data, con);
