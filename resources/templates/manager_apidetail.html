@@ -15,7 +15,9 @@
                                     {{if eq .auth.modifyApi true}}<a href="/manager/{{.proid}}/Api/info?did={{.basic.Id}}" class="btn btn-white btn-sm" title="编辑"><i class="fa fa-paste"></i></a>{{end}}
                                     {{if eq .auth.delApi true}}<a href="javascript:;" class="btn btn-white btn-sm deleteApi" title="删除" did="{{.basic.Id}}" proid="{{.proid}}"><i class="fa fa-trash-o"></i></a>{{end}}
                                 </div>
-                                <button class="btn btn-white btn-sm"><a href="/manager/{{.proid}}/Api/list"><i class="fa fa-mail-reply-all"></i> 返回列表</a></button>
+                                <label class="btn btn-white btn-sm">
+                                    <a href="/manager/{{.proid}}/Api/list"><i class="fa fa-mail-reply-all"></i> 返回列表</a>
+                                </label>
                                 {{if and (eq .auth.publishApi true) (eq .basic.Status 1)}}<a  href="javascript:;" class="btn btn-info btn-sm publish" did="{{.basic.Id}}" proid="{{.proid}}" publishEnv="{{.basic.PublishEnv}}">发布</a>{{end}}
                                 <a href="/mock{{.basic.Gateway}}?did={{.basic.Id}}" class="btn btn-primary  btn-sm" target="_blank">mock</a>
                                 {{/*<button class="btn btn-success  btn-sm">调试</button>*/}}

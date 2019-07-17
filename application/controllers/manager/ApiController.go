@@ -1,9 +1,6 @@
 package manager
 
 import (
-	"xapimanager/application/Services"
-	"xapimanager/application/common"
-	"xapimanager/application/models"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/mozillazg/go-pinyin"
@@ -11,6 +8,9 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"xapimanager/application/Services"
+	"xapimanager/application/common"
+	"xapimanager/application/models"
 )
 
 var limit = 20
@@ -95,11 +95,19 @@ func GetApiList(c *gin.Context) {
 	cls := models.GetClassify(proid, 0, auth["dataAuth"])
 
 	gather := map[string][]map[string]interface{}{}
+	key := ""
 	for _, vol := range cls {
 		for _, v := range vol.Child {
-			key := strings.ToUpper(
-				common.SubString(
-					pinyin.Pinyin(v.Classifyname, pinyin.NewArgs())[0][0], 0, 1, false))
+			py := pinyin.Pinyin(v.Classifyname, pinyin.NewArgs())
+			if len(py) > 0 {
+				key = strings.ToUpper(
+					common.SubString(
+						py[0][0], 0, 1, false))
+			} else {
+				key = strings.ToUpper(
+					common.SubString(
+						v.Classifyname, 0, 1, false))
+			}
 			gather[key] = append(gather[key], map[string]interface{}{
 				"id":           v.Id,
 				"classifyname": v.Classifyname,
@@ -150,7 +158,9 @@ func GetAjaxApilist(c *gin.Context) {
 		}
 	}
 	apistatus := strings.Split(c.Query("status"), ",")
+
 	data := models.GetApilist(con, start, limit, apistatus, auth["dataAuth"])
+
 	//功能节点权限检查
 	data["auth"] = map[string]bool{
 		"addVersion":   common.CheckAuth("addVersion", auth["operate"]),

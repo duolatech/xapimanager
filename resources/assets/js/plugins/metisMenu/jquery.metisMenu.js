@@ -42,7 +42,7 @@
                 $this.find("li.active").has("ul").children("a").addClass("doubleTapToGo");
             }
 
-            $this.find("li").has("ul").children("a").on("click" + "." + pluginName, function(e) {
+            $this.find("li").children("a").on("click" + "." + pluginName, function(e) {
                 e.preventDefault();
 
                 //Do we need to enable the double tap
