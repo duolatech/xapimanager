@@ -1,6 +1,9 @@
 
 $(function(){
 
+    $(".navbar-right li").eq(1).on("mouseleave", function () {
+        $(this).removeClass("open")
+    })
     //菜单点击
     $(".J_menuItem").on('click',function(){
 

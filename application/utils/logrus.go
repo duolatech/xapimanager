@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"xapimanager/application/common"
 	"xapimanager/config"
 	"github.com/lestrrat/go-file-rotatelogs"
 	"github.com/pkg/errors"
@@ -21,6 +22,12 @@ func init() {
 	Log.SetLevel(logrus.InfoLevel)
 	path, _ := os.Getwd()
 	logPath := path + "/" + config.GetGlobal().LOG_PATH
+	// 判断日志路径是否存在(19/08/29 - 刘鸣扬)
+	res, _ := common.PathExists(logPath)
+	if !res {
+		// 若日志路径不存在则创建目录(19/08/29 - 刘鸣扬)
+		_, _ = common.CreateDir(logPath)
+	}
 	ConfigLocalFilesystemLogger(logPath, "std.log", time.Hour*24*7, time.Hour*24)
 }
 func ConfigLocalFilesystemLogger(logPath string, logFileName string, maxAge time.Duration, rotationTime time.Duration) {

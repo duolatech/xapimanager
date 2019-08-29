@@ -142,3 +142,21 @@ body.signin {
     margin-left: 10px;
     vertical-align:bottom;
 }
+.qiyubtnbox{
+    margin:30px auto 0;
+    text-align: center;
+    overflow: hidden;
+}
+.qiyubtnbox a{
+    padding: 8px 0;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 40px;
+    margin-bottom: 15px;
+    
+
+}
+.qiyubtnbox a i{
+    margin-right: 4px;
+    
+}

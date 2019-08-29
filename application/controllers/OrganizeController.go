@@ -1,11 +1,11 @@
 package controllers
 
 import (
+	"xapimanager/application/Services"
+	"xapimanager/application/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-	"xapimanager/application/Services"
-	"xapimanager/application/models"
 )
 
 type UserOrganize struct {

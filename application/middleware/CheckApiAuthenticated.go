@@ -26,7 +26,7 @@ func ApiAuthCheck() gin.HandlerFunc {
 
 		//未登录用户直接跳转到登录页
 		if uid == 0 || username == "" {
-			c.Redirect(http.StatusMovedPermanently, "/login")
+			c.Redirect(http.StatusFound, "/login")
 			c.Abort()
 			return
 		}
