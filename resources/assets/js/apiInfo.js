@@ -246,7 +246,7 @@ jQuery.validator.addMethod("UrlPathCheck", function(value, element) {
     return this.optional(element) || /^\/[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/.test(value);
 }, "请输入正确的gateway Api地址");
 jQuery.validator.addMethod("UrlCheck", function(value, element) {
-    return this.optional(element) || /^((https|http)?:\/\/)+[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/.test(value);
+    return this.optional(element) || /^((https|http)?:\/\/)+[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/.test(value);
 }, "请输入正确的local Api地址");
 var validator = $("#myForm").validate({
     submitHandler: function(form) {

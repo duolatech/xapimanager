@@ -16,7 +16,7 @@
                             <div class="col-sm-9">
                                 <div class="float-e-margins">
                                     <div class="ibox-content">
-                                        <form id="myForm" method="post" class="form-horizontal">
+                                        <form id="myForm" method="post" class="form-horizontal" οnsubmit="return false;">
                                             <div class="form-group"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户名</label>
@@ -86,7 +86,7 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-4 col-sm-offset-2">
-                                                    <button class="btn btn-primary btn-info-submit" type="submit" userid="{{.userInfo.Uid}}">保存</button>
+                                                    <button class="btn btn-primary btn-info-submit" type="button" userid="{{.userInfo.Uid}}">保存</button>
                                                 </div>
                                             </div>
                                         </form>

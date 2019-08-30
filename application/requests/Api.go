@@ -52,7 +52,7 @@ func ApiVerify() gin.HandlerFunc {
 func gatewayURl(fl validator.FieldLevel) bool {
 
 	domain := fl.Field().String()
-	matched, _ := regexp.MatchString(`^\/[A-Za-z0-9]+[\/=\?%\-&_~@[\]\':+!]*([^<>\"\"])*$`, domain)
+	matched, _ := regexp.MatchString(`^\/[A-Za-z0-9\-]+[\/=\?%\-&_~@[\]\':+!]*([^<>\"\"])*$`, domain)
 
 	return matched
 }
@@ -61,7 +61,7 @@ func gatewayURl(fl validator.FieldLevel) bool {
 func localURL(fl validator.FieldLevel) bool {
 
 	sort := fl.Field().String()
-	matched, _ := regexp.MatchString(`^((https|http)?:\/\/)+[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~@[\]\':+!]*([^<>\"\"])*`, sort)
+	matched, _ := regexp.MatchString(`^((https|http)?:\/\/)+[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+[\/=\?%\-&_~@[\]\':+!]*([^<>\"\"])*`, sort)
 
 	return matched
 }
