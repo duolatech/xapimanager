@@ -1,4 +1,0 @@
-time="2020-04-20 14:06:23.349" level=info msg="dial tcp 127.0.0.1:6379: connect: connection refused" filename=redisconnet size=10
-time="2020-04-20 14:06:35.429" level=info msg="dial tcp 127.0.0.1:6379: connect: connection refused" filename=redisconnet size=10
-time="2020-04-20 14:06:35.551" level=info msg="dial tcp 127.0.0.1:6379: connect: connection refused" filename=redisconnet size=10
-time="2020-04-20 14:06:35.563" level=info msg="dial tcp 127.0.0.1:6379: connect: connection refused" filename=redisconnet size=10
