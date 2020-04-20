@@ -11,7 +11,7 @@ XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供
 
 - 官方地址：https://xapimanager.opiping.com/
 - 项目部署及配置：https://shuka.opiping.com/t/xapimanager (安装和升级请参考手册)
-- Windows、Mac 客户端下载: https://www.opiping.com/
+- Windows、Mac、Ubuntu、Deepin 客户端下载: https://www.opiping.com/
 
 <img src="./screenshot/apps.jpg">
 
@@ -20,7 +20,7 @@ XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供
 * 码云地址：https://git.oschina.net/duolatech/xapimanager
 * github地址：https://github.com/duolatech/xapimanager
 
-Windows、Mac客户端
+Windows、Mac、Ubuntu、Deepin客户端
 ========
 **多团队管理** 
 <img src="./screenshot/team.gif">
